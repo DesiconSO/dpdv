@@ -1,0 +1,11 @@
+KEY PAIR
+
+criar chave:
+ssh-keygen -t rsa -b 4096 -m pem -f desicon_pk
+
+
+Gerar .pem file
+openssl rsa -in desicon_pk --outform pem > desicon_pk.pem
+
+Permissao
+chmod 400 desicon_pk.pem
