@@ -13,7 +13,7 @@ class StoreDiscountRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class StoreDiscountRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'min_amount'    => 'nullable|integer|min:0',
+            'max_amount'    => 'required|integer|min:0',
+            'discount'      => 'required|integer|between:0,16',
         ];
     }
 }

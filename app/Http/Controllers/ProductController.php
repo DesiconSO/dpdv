@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProductsRequest;
-use App\Http\Requests\UpdateProductsRequest;
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Products;
 
-class ProductsController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,7 +36,7 @@ class ProductsController extends Controller
      * @param  \App\Http\Requests\StoreProductsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreProductsRequest $request)
+    public function store(StoreProductRequest $request)
     {
         //
     }
@@ -70,7 +70,7 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductsRequest $request, Products $products)
+    public function update(UpdateProductRequest $request, Products $products)
     {
         //
     }

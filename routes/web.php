@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProposalController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,13 +24,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resources(
-    [
-        'clients' => ClientController::class,
-        'proposals' => ProposalController::class,
-        'products' => ProductController::class,
-        'users' => UserController::class,
-    ]
-);
+Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+    Route::resources(
+        [
+            'clients' => ClientController::class,
+            'proposals' => ProposalController::class,
+            'products' => ProductController::class,
+        ]
+    );
+});
 
 require __DIR__ . '/auth.php';

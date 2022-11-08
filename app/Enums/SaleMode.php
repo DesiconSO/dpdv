@@ -2,8 +2,8 @@
 
 namespace App\Enums;
 
-enum SaleMode: string
+enum SaleMode: int
 {
-    case CONSUPTION = 'consumption';
-    case NO_SALE = 'resale';
+    case SALE = 1;
+    case RESALE = 0;
 }

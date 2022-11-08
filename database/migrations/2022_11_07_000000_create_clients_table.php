@@ -13,7 +13,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('physical_person');
+            $table->char('person_type');
             $table->string('fone');
             $table->string('state_registration');
             $table->string('cpf_cnpj');
@@ -27,7 +27,6 @@ return new class extends Migration
             $table->char('contributor', 1)->default(1);
             $table->string('fantasy');
             $table->string('tax_regime_code');
-            $table->string('municipal_registration');
             $table->timestamps();
         });
     }
