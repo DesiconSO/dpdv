@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProposalRequest;
 use App\Http\Requests\UpdateProposalRequest;
 use App\Models\Proposal;
-use Illuminate\Support\Facades\Http;
 
 class ProposalController extends Controller
 {
@@ -18,6 +17,7 @@ class ProposalController extends Controller
      */
     public function index()
     {
+        return view('pages.proposals.index', ['proposals' => Proposal::all()]);
     }
 
     /**

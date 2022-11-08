@@ -24,8 +24,8 @@ class StoreDiscountRequest extends FormRequest
     public function rules()
     {
         return [
-            'max_amount'    => 'required|unique|integer|min:0',
-            'discount'      => 'required|integer|between:0,15',
+            'max_amount' => 'required|unique|integer|min:0',
+            'discount' => 'required|integer|between:0,15',
         ];
     }
 }

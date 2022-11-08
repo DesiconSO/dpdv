@@ -18,5 +18,6 @@ class Product extends Model
     ];
 
     protected $cast = [];
+
     public $timestamps = false;
 }

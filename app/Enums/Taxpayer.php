@@ -2,8 +2,6 @@
 
 namespace App\Enums;
 
-use Illuminate\Contracts\Translation\Translator;
-
 enum Taxpayer: int
 {
     case CONTRIBUTOR = 1; // 1 - Contribuinte ICMS

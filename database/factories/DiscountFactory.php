@@ -19,10 +19,10 @@ class DiscountFactory extends Factory
     public function definition()
     {
         return [
-            'user_id'       => Factory::factoryForModel(User::class),
-            'product_id'    => Factory::factoryForModel(Product::class),
-            'max_amount'    => $this->faker->randomNumber(4, false),
-            'discount'      => $this->faker->randomFloat(1, 1, 15),
+            'user_id' => Factory::factoryForModel(User::class),
+            'product_id' => Factory::factoryForModel(Product::class),
+            'max_amount' => $this->faker->randomNumber(4, false),
+            'discount' => $this->faker->randomFloat(1, 1, 15),
         ];
     }
 }

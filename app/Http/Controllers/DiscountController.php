@@ -17,7 +17,7 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.discounts.index', ['discounts' => Discount::all()]);
     }
 
     /**
