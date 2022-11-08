@@ -14,8 +14,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('sku');
-            $table->decimal('price', 10, 2);
-            $table->timestamps();
+            $table->float('price', 10, 2);
         });
     }
 

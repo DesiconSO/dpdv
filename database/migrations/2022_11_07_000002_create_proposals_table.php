@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('shipping_company');
             $table->char('sale_mode', 1)->default(0);
             $table->string('shipping_mode');
-            $table->decimal('seller_discount', 2, 2)->default(0);
-            $table->decimal('shipping_price', 10, 2)->default(0);
+            $table->float('seller_discount', 5, 2)->default(0);
+            $table->float('shipping_price', 10, 2)->default(0);
             $table->text('seller_note');
             $table->char('status', 1)->default(0);
             $table->timestamps();

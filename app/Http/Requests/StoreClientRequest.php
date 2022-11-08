@@ -41,7 +41,7 @@ class StoreClientRequest extends FormRequest
             'zip_code'                  => ['required', 'string', 'max:10'],
             'city'                      => ['required', 'string', 'max:30'],
             'fu'                        => ['required', 'string', 'size:2'],
-            'state_registration'        => ['integer', 'max:12'],
+            'state_registration'        => ['integer', 'min:6', 'max:12'],
             'tax_regime_code'           => ['required', new Enum(TaxRegimeCode::class)],
         ];
     }

@@ -10,7 +10,7 @@ class Proposal extends Model
 {
     use HasFactory;
 
-    private $fillable = [
+    protected $fillable = [
         'shipping_company',
         'sale_mode',
         'shipping_mode',
@@ -20,7 +20,10 @@ class Proposal extends Model
         'status',
     ];
 
-    private $cast = [];
+    private $cast = [
+        'shipping_mode' => 'enum',
+        'sale_mode' => 'enum',
+    ];
 
     public function user(): BelongsTo
     {

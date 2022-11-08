@@ -10,7 +10,6 @@ class Discount extends Model
     use HasFactory;
 
     protected $fillable = [
-        'min_amount',
         'max_amount',
         'discount',
     ];

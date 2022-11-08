@@ -14,9 +14,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->foreignId('product_id')->constrained();
-            $table->integer('min_amount')->default(0);
-            $table->integer('max_amount')->nullable();
-            $table->decimal('discount', 2, 2)->default(0);
+            $table->integer('max_amount')->default(0);
+            $table->float('discount', 2, 2)->default(0);
             $table->timestamps();
         });
     }
