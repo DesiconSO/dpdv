@@ -83,6 +83,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        dd('oi');
+        $product->delete();
+        return redirect()->route('product.index')->with('success', __('table.deleted'));
     }
 }

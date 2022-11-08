@@ -28,10 +28,10 @@ Route::get('/dashboard', function () {
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::resources(
         [
-            'clients' => ClientController::class,
-            'proposals' => ProposalController::class,
-            'products' => ProductController::class,
-            'discounts' => DiscountController::class,
+            'client' => ClientController::class,
+            'proposal' => ProposalController::class,
+            'product' => ProductController::class,
+            'discount' => DiscountController::class,
         ]
     );
 });

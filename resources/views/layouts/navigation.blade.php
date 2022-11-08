@@ -15,16 +15,16 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('products.index')" :active="request()->routeIs('products*')">
+                    <x-nav-link :href="route('product.index')" :active="request()->routeIs('product*')">
                         {{ __('navigation.products') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('proposals.index')" :active="request()->routeIs('proposals*')">
+                    <x-nav-link :href="route('proposal.index')" :active="request()->routeIs('proposal*')">
                         {{ __('navigation.proposals') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('clients.index')" :active="request()->routeIs('clients*')">
+                    <x-nav-link :href="route('client.index')" :active="request()->routeIs('client*')">
                         {{ __('navigation.clients') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('discounts.index')" :active="request()->routeIs('discounts*')">
+                    <x-nav-link :href="route('discount.index')" :active="request()->routeIs('discount*')">
                         {{ __('navigation.discounts') }}
                     </x-nav-link>
                 </div>
