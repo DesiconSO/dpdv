@@ -13,20 +13,22 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->char('person_type');
-            $table->string('fone');
-            $table->string('state_registration');
+            $table->string('email');
+            $table->char('person_type')->default('F');
+            $table->string('fone')->nullable();
+            $table->string('state_registration')->nullable();
             $table->string('cpf_cnpj');
-            $table->string('address');
+            $table->string('adress');
             $table->integer('number');
-            $table->string('complement');
+            $table->string('complement')->nullable();
             $table->string('district');
-            $table->string('zip_code');
+            $table->string('zipcode');
             $table->string('city');
             $table->char('fu', 2);
             $table->char('contributor', 1)->default(1);
-            $table->string('fantasy');
-            $table->string('tax_regime_code');
+            $table->string('fantasy')->nullable();
+            $table->char('tax_regime_code')->nullable();
+            $table->string('observation')->nullable();
             $table->timestamps();
         });
     }

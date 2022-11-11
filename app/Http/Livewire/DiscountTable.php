@@ -26,8 +26,6 @@ class DiscountTable extends DataTableComponent
                 ->sortable(),
             Column::make("Discount", "discount"),
             Column::make("Max amount", "max_amount"),
-            Column::make("Created at", "created_at")
-                ->sortable(),
             Column::make("Updated at", "updated_at")
                 ->sortable(),
         ];

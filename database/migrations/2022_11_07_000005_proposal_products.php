@@ -10,12 +10,14 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('propostal_products', function (Blueprint $table) {
+        Schema::create('proposal_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('proposal_id')->constrained();
             $table->foreignId('product_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->float('discount', 10, 2);
             $table->string('amount');
+            $table->timestamps();
         });
     }
 

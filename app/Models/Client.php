@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\Contributor;
+use App\Enums\PersonType;
+use App\Enums\TaxRegimeCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -11,23 +14,29 @@ class Client extends Model
 
     protected $fillable = [
         'name',
+        'email',
         'physical_person',
         'fone',
         'state_registration',
         'cpf_cnpj',
-        'address',
+        'adress',
         'number',
         'complement',
         'district',
-        'zip_code',
+        'zipcode',
         'city',
         'fu',
         'fantasy',
         'tax_regime_code',
         'municipal_registration',
+        'observation',
+        'person_type',
+        'contributor'
     ];
 
     protected $cast = [
-        'physical_person' => 'boolean',
+        'person_type' => PersonType::class,
+        'contributor' => Contributor::class,
+        'tax_regime_code' => TaxRegimeCode::class,
     ];
 }

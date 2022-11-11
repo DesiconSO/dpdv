@@ -2,8 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\Contributor;
 use App\Enums\PersonType;
-use App\Enums\Taxpayer;
 use App\Enums\TaxRegimeCode;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -23,6 +23,7 @@ class ClientFactory extends Factory
 
         return [
             'name' => $faker->name(),
+            'email' => $faker->unique()->safeEmail(),
             'person_type' => $faker->randomElement(PersonType::cases()),
             'fone' => $faker->cellphoneNumber(),
             'state_registration' => $faker->randomNumber(9, true),
@@ -34,9 +35,12 @@ class ClientFactory extends Factory
             'zip_code' => $faker->postcode(),
             'city' => $faker->city(),
             'fu' => $faker->regionAbbr(),
-            'contributor' => $faker->randomElement(Taxpayer::cases()),
+            'contributor' => $faker->randomElement(Contributor::cases()),
             'fantasy' => $faker->firstName(),
             'tax_regime_code' => $faker->randomElement(TaxRegimeCode::cases()),
+            'observation' => $faker->text(),
+            'created_at' => $faker->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => $faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Contributor;
 use App\Enums\PersonType;
 use App\Enums\Taxpayer;
 use App\Enums\TaxRegimeCode;
@@ -33,7 +34,7 @@ class StoreClientRequest extends FormRequest
             'person_type' => ['required', new Enum(PersonType::class)],
             'fone' => ['integer', 'min:6', 'max:40'],
             'cpf_cnpj' => ['required', 'unique:clients', 'integer', 'max:14'],
-            'taxpayer' => ['required', new Enum(Taxpayer::class)],
+            'contributor' => ['required', new Enum(Contributor::class)],
             'adress' => ['required', 'string', 'max:50'],
             'number' => ['required', 'string', 'max:10'],
             'complement' => ['string', 'max:100'],
@@ -43,6 +44,7 @@ class StoreClientRequest extends FormRequest
             'fu' => ['required', 'string', 'size:2'],
             'state_registration' => ['integer', 'min:6', 'max:12'],
             'tax_regime_code' => ['required', new Enum(TaxRegimeCode::class)],
+            'observation' => ['string', 'max:255'],
         ];
     }
 }
