@@ -85,6 +85,7 @@ class ProductController extends Controller
     {
         dd('oi');
         $product->delete();
+
         return redirect()->route('product.index')->with('success', __('table.deleted'));
     }
 }

@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Discount;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\Discount;
 
 class DiscountTable extends DataTableComponent
 {
@@ -18,15 +18,15 @@ class DiscountTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->sortable(),
-            Column::make("User", "user.name")
+            Column::make('User', 'user.name')
                 ->sortable(),
-            Column::make("SKU", "product.sku")
+            Column::make('SKU', 'product.sku')
                 ->sortable(),
-            Column::make("Discount", "discount"),
-            Column::make("Max amount", "max_amount"),
-            Column::make("Updated at", "updated_at")
+            Column::make('Discount', 'discount'),
+            Column::make('Max amount', 'max_amount'),
+            Column::make('Updated at', 'updated_at')
                 ->sortable(),
         ];
     }

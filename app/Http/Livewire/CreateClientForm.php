@@ -10,23 +10,38 @@ use Livewire\Component;
 
 class CreateClientForm extends Component
 {
-
     public $name;
+
     public $fantasy;
+
     public $email;
+
     public $person_type;
+
     public $cpf_cnpj;
+
     public $tax_regime_code;
+
     public $contributor;
+
     public $state_registration;
+
     public $zipcode;
+
     public $fu;
+
     public $city;
+
     public $district;
+
     public $number;
+
     public $complement;
+
     public $fone;
+
     public $observation;
+
     public $adress;
 
     protected $rules = [
@@ -63,7 +78,7 @@ class CreateClientForm extends Component
             compact([
                 'personTypes',
                 'contributors',
-                'taxRegimeCodes'
+                'taxRegimeCodes',
             ])
         );
     }
@@ -75,11 +90,13 @@ class CreateClientForm extends Component
         // Store the client...
         if (Client::create($this->all())) {
             session()->flash('success', 'Cliente cadastrado com sucesso!');
+
             return redirect()->route('client.index');
         } else {
             session()->flash('error', 'Erro ao cadastrar cliente!');
+
             return redirect()->route('client.index');
-        };
+        }
     }
 
     public function personTypeCases()

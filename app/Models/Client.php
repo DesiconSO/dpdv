@@ -7,6 +7,7 @@ use App\Enums\PersonType;
 use App\Enums\TaxRegimeCode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Client extends Model
 {
@@ -31,7 +32,7 @@ class Client extends Model
         'municipal_registration',
         'observation',
         'person_type',
-        'contributor'
+        'contributor',
     ];
 
     protected $cast = [
@@ -39,4 +40,35 @@ class Client extends Model
         'contributor' => Contributor::class,
         'tax_regime_code' => TaxRegimeCode::class,
     ];
+
+    protected function name(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => formatText($value),
+            set: fn ($value) => unformatText($value),
+        );
+    }
+
+    protected function email(): Attribute
+    {
+        return Attribute::make(
+            set: fn ($value) => unformatText($value),
+        );
+    }
+
+    protected function cpfCnpj(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => formatDocument($value),
+            set: fn ($value) => unformatDocument($value)
+        );
+    }
+
+    protected function fone(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($value) => formatPhone($value),
+            set: fn ($value) => unformatDocument($value)
+        );
+    }
 }

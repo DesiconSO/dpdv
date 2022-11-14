@@ -4,7 +4,6 @@ namespace App\Http\Requests;
 
 use App\Enums\Contributor;
 use App\Enums\PersonType;
-use App\Enums\Taxpayer;
 use App\Enums\TaxRegimeCode;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;

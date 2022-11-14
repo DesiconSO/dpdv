@@ -22,16 +22,16 @@ class ProductTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->sortable(),
-            Column::make(__('table.description'), "name")
+            Column::make(__('table.description'), 'name')
                 ->sortable(),
-            Column::make("SKU", "sku")
+            Column::make('SKU', 'sku')
                 ->sortable(),
-            Column::make(__('table.price'), "price")
+            Column::make(__('table.price'), 'price')
                 ->sortable()
                 ->format(
-                    fn ($value, $row, Column $column) => __('table.money') . " " . $row->price
+                    fn ($value, $row, Column $column) => __('table.money').' '.$row->price
                 ),
             ButtonGroupColumn::make('Actions')
                 ->attributes(function ($row) {

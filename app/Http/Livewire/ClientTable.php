@@ -20,19 +20,19 @@ class ClientTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->sortable(),
-            Column::make(__('table.name'), "name")->searchable()
+            Column::make(__('table.name'), 'name')->searchable()
                 ->sortable(),
-            Column::make(__('table.identification'), "cpf_cnpj")->searchable()
+            Column::make(__('table.identification'), 'cpf_cnpj')->searchable()
                 ->sortable(),
-            Column::make(__('table.fone'), "fone")->searchable()
+            Column::make(__('table.fone'), 'fone')->searchable()
                 ->sortable(),
-            Column::make(__('table.fu'), "fu")->searchable()
+            Column::make(__('table.fu'), 'fu')->searchable()
                 ->sortable(),
-            Column::make(__('table.city'), "city")->searchable()
+            Column::make(__('table.city'), 'city')->searchable()
                 ->sortable(),
-            Column::make(__('table.updated_at'), "updated_at")
+            Column::make(__('table.updated_at'), 'updated_at')
                 ->sortable(),
         ];
     }

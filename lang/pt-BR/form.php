@@ -42,5 +42,5 @@ return [
             'normal_regime' => 'Regime Normal',
             'non_contributor' => 'Não Contribuinte',
         ],
-    ]
+    ],
 ];
