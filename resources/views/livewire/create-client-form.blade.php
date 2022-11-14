@@ -14,7 +14,7 @@
         <div>
             <x-input-label for="email" :value="__('form.email')" />
 
-            <x-text-input id="email" class="block w-full mt-1" type="text" name="email" wire:model.lazy='email' :value="old('email')" />
+            <x-text-input id="email" class="block w-full mt-1 disabled:bg-slate-100" type="text" name="email" wire:model.lazy='email' :value="old('email')" disabled="{{ auth()->user()->roles->first()->name == 'user' }}" />
 
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>

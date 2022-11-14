@@ -6,6 +6,8 @@ use App\Enums\Contributor;
 use App\Enums\PersonType;
 use App\Enums\TaxRegimeCode;
 use App\Models\Client;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CreateClientForm extends Component
@@ -44,16 +46,26 @@ class CreateClientForm extends Component
 
     public $adress;
 
+    public $user;
+
+    public function __construct()
+    {
+        if (auth()->user()->roles->first()->name === 'user') {
+            $this->name = auth()->user()->name ?? '';
+            $this->email = auth()->user()->email ?? '';
+        }
+    }
+
     protected $rules = [
         'name' => 'required|string|between:1,120',
         'email' => 'required|email',
-        'fantasy' => 'string|between:1,30',
+        'fantasy' => 'nullable|string|between:1,30',
         'person_type' => 'required',
         'fone' => 'integer|max_digits:40',
         'contributor' => 'required',
         'cpf_cnpj' => 'required|unique:clients|integer|max_digits:14',
         'adress' => 'required|string|between:1,50',
-        'number' => 'required|string|between:1,10',
+        'number' => 'required|string|digits_between:1,10',
         'complement' => 'nullable|string|between:1,100',
         'district' => 'required|string|between:1,30',
         'zipcode' => 'required|string|between:1,10',
@@ -88,13 +100,18 @@ class CreateClientForm extends Component
         $this->validate();
 
         // Store the client...
-        if (Client::create($this->all())) {
-            session()->flash('success', 'Cliente cadastrado com sucesso!');
+        if ($client = Client::create($this->all())) {
+            if (auth()->user()->roles->first()->name === 'user') {
+                $user = User::find(auth()->user()->id);
+                $user->client_id = $client->id;
+                $user->name = $client->name;
+                $user->save();
+            }
 
+            session()->flash('message', 'Cliente cadastrado com sucesso!');
             return redirect()->route('client.index');
         } else {
-            session()->flash('error', 'Erro ao cadastrar cliente!');
-
+            session()->flash('message', 'Erro ao cadastrar cliente!');
             return redirect()->route('client.index');
         }
     }

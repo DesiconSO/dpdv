@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('state_registration')->nullable();
             $table->string('cpf_cnpj');
             $table->string('adress');
-            $table->integer('number');
+            $table->string('number');
             $table->string('complement')->nullable();
             $table->string('district');
             $table->string('zipcode');

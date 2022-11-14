@@ -5,7 +5,9 @@
                 {{ __('navigation.clients') }}
             </h2>
 
-            <livewire:button-default text="{{ __('navigation.create') }}" link="{{ route('client.create') }}">
+            @role('seller|admin')
+                <livewire:button-default text="{{ __('navigation.create') }}" link="{{ route('client.create') }}">
+                @endrole
         </div>
     </x-slot>
 

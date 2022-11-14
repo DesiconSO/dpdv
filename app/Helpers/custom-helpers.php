@@ -23,13 +23,15 @@ if (!function_exists('unformatDocument')) {
 
 
 if (!function_exists('formatPhone')) {
-    function formatPhone($phone): string
+    function formatPhone($phone): string|int
     {
         $formatedPhone = preg_replace('/[^0-9]/', '', $phone);
         $matches = [];
         preg_match('/^([0-9]{2})([0-9]{4,5})([0-9]{4})$/', $formatedPhone, $matches);
         if ($matches) {
             return '(' . $matches[1] . ') ' . $matches[2] . '-' . $matches[3];
+        } else {
+            return $phone;
         }
     }
 }
