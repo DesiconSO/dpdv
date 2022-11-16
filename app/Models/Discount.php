@@ -12,6 +12,8 @@ class Discount extends Model
     protected $fillable = [
         'max_amount',
         'discount',
+        'user_id',
+        'product_id'
     ];
 
     protected $cast = [];

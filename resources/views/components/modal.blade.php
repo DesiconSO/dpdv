@@ -14,8 +14,8 @@
             </button>
             <div class="px-6 py-6 lg:px-8">
                 <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">{{ $text }}</h3>
-                <form action="{{ $route }}" class="p-2">
-
+                <form action="{{ $route }}" class="p-2" enctype="multipart/form-data" method="POST">
+                    @csrf
                     {{ $slot }}
 
                     <div class="flex items-center justify-end w-full mt-5">

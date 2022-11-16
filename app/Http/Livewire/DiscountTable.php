@@ -13,19 +13,24 @@ class DiscountTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setSingleSortingDisabled();
     }
 
     public function columns(): array
     {
         return [
             Column::make('Id', 'id')
+                ->searchable()
                 ->sortable(),
             Column::make('User', 'user.name')
+                ->searchable()
                 ->sortable(),
             Column::make('SKU', 'product.sku')
+                ->searchable()
+                ->sortable(),
+            Column::make('Max amount', 'max_amount')
                 ->sortable(),
             Column::make('Discount', 'discount'),
-            Column::make('Max amount', 'max_amount'),
             Column::make('Updated at', 'updated_at')
                 ->sortable(),
         ];

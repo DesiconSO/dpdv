@@ -25,6 +25,7 @@ return [
 
     'first_select' => 'Selecione uma das opções...',
     'fileExcel' => 'Envie o arquivo com os descontos',
+    'success' => 'Ocorreu tudo de acordo com o planejado!',
 
     'enums' => [
         'contributor' => [

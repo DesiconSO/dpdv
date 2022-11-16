@@ -35,7 +35,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
         ]
     );
 
-    Route::get('/send', [DiscountController::class, 'DiscountList'])->name('discount.list');
+    Route::post('/send', [DiscountController::class, 'DiscountList'])->name('discount.list');
 });
 
 Route::get('/teste', [ProductController::class, 'teste']);

@@ -65,12 +65,12 @@ class UpdateProductsFromBlingJob implements ShouldQueue
     {
         foreach ($products as $product) {
             Product::updateOrCreate(
-                ['sku' => $product['produto']['codigo']],
-                [
-                    'name' => $product['produto']['descricao'],
-                    'price' => $product['produto']['preco'],
-                    'sku' => $product['produto']['codigo'],
-                ]
+                    ['sku' => $product['produto']['codigo']],
+                    [
+                        'name' => $product['produto']['descricao'],
+                        'price' => $product['produto']['preco'],
+                        'sku' => $product['produto']['codigo'],
+                    ]
             );
         }
     }

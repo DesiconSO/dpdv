@@ -6,12 +6,13 @@
             </div>
             <div class="flex items-center justify-end col-span-3 m-0">
                 @role('seller|admin')
-                    <x-modal text="{{ __('navigation.export') }}" identification="export" route="{{route('discount.list')}}" >
-                    </x-modal>
+                    <button wire:click="exportDiscountTable" class="text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" type="button">
+                        {{ __('navigation.export') }}
+                    </button>
 
                     <x-modal text="{{ __('navigation.import') }}" identification="import" route="{{route('discount.list')}}" >
                         <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">{{ __('form.fileExcel') }}</label>
-                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
+                        <input aria-describedby="file_input_help" name="file_input" id="file_input" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                         <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF.</p>
                     </x-modal>
 
