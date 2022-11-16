@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'apikey' => env('BLING_APIKEY'),
+    'apikey' => env('API_KEY_BLING'),
 ];

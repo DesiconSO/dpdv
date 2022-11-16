@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreDiscountRequest;
 use App\Http\Requests\UpdateDiscountRequest;
 use App\Models\Discount;
+use Illuminate\Http\Request;
 
 class DiscountController extends Controller
 {
@@ -28,6 +29,11 @@ class DiscountController extends Controller
     public function create()
     {
         //
+    }
+
+    public function DiscountList(Request $request)
+    {
+        dd($request->collect());
     }
 
     /**

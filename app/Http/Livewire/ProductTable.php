@@ -25,8 +25,10 @@ class ProductTable extends DataTableComponent
             Column::make('Id', 'id')
                 ->sortable(),
             Column::make(__('table.description'), 'name')
+                ->searchable()
                 ->sortable(),
             Column::make('SKU', 'sku')
+                ->searchable()
                 ->sortable(),
             Column::make(__('table.price'), 'price')
                 ->sortable()
@@ -40,8 +42,8 @@ class ProductTable extends DataTableComponent
                     ];
                 })
                 ->buttons([
-                    LinkColumn::make('Destroy') // make() has no effect in this case but needs to be set anyway
-                        ->title(fn ($row) => __('table.delete'))
+                    LinkColumn::make('Desconto') // make() has no effect in this case but needs to be set anyway
+                        ->title(fn ($row) => __('Desconto'))
                         ->location(fn ($row) => route('product.destroy', $row->id))
                         ->attributes(function ($row) {
                             return [

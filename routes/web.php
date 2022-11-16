@@ -4,7 +4,6 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProposalController;
-use App\Models\Client;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +34,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
             'discount' => DiscountController::class,
         ]
     );
+
+    Route::get('/send', [DiscountController::class, 'DiscountList'])->name('discount.list');
 });
 
-require __DIR__ . '/auth.php';
+Route::get('/teste', [ProductController::class, 'teste']);
+
+require __DIR__.'/auth.php';

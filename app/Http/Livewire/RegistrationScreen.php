@@ -7,8 +7,11 @@ use Livewire\Component;
 class RegistrationScreen extends Component
 {
     public $name;
+
     public $email;
+
     public $password;
+
     public $password_confirmation;
 
     public function render()

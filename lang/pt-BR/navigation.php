@@ -6,4 +6,7 @@ return [
     'proposals' => 'Propostas',
     'discounts' => 'Descontos',
     'create' => 'Criar',
+    'import' => 'Importar',
+    'export' => 'Exportar',
+    'close' => 'Fechar',
 ];

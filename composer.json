@@ -16,6 +16,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
+        "psr/simple-cache": "^2.0",
         "rappasoft/laravel-livewire-tables": "^2.8",
         "spatie/laravel-permission": "^5.5"
     },

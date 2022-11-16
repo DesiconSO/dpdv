@@ -8,7 +8,7 @@ class ButtonDefault extends Component
 {
     public string $text;
 
-    public string $link;
+    public ?string $link = null;
 
     public function render()
     {

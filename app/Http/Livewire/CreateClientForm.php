@@ -7,7 +7,6 @@ use App\Enums\PersonType;
 use App\Enums\TaxRegimeCode;
 use App\Models\Client;
 use App\Models\User;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class CreateClientForm extends Component
@@ -109,9 +108,11 @@ class CreateClientForm extends Component
             }
 
             session()->flash('message', 'Cliente cadastrado com sucesso!');
+
             return redirect()->route('client.index');
         } else {
             session()->flash('message', 'Erro ao cadastrar cliente!');
+
             return redirect()->route('client.index');
         }
     }

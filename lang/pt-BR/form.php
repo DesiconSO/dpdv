@@ -24,6 +24,7 @@ return [
     'seller' => 'Vendedor',
 
     'first_select' => 'Selecione uma das opções...',
+    'fileExcel' => 'Envie o arquivo com os descontos',
 
     'enums' => [
         'contributor' => [

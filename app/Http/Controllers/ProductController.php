@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
+use Illuminate\Support\Facades\Http;
 
 class ProductController extends Controller
 {
@@ -39,6 +40,47 @@ class ProductController extends Controller
     public function store(StoreProductRequest $request)
     {
         //
+    }
+
+    public function teste()
+    {
+        $count = 1;
+        $finished = false;
+
+        while ($finished == false) {
+            $response = Http::bling([])->get("produtos/page={$count}/json/");
+
+            if ($response->successful()) {
+                if (isset($response['retorno']['produtos'])) {
+                    $dados = $response['retorno']['produtos'];
+                    $this->storeProducts($dados);
+                } else {
+                    $finished = true;
+                    break;
+                }
+
+                print_r("\nNumero do contador produtos $count");
+                $count++;
+            } else {
+                $finished = true;
+                break;
+            }
+        }
+        dd(Product::all());
+    }
+
+    private function storeProducts($products)
+    {
+        foreach ($products as $product) {
+            Product::updateOrCreate(
+                ['sku' => $product['produto']['codigo']],
+                [
+                    'name' => $product['produto']['descricao'],
+                    'price' => $product['produto']['preco'],
+                    'sku' => $product['produto']['codigo'],
+                ]
+            );
+        }
     }
 
     /**

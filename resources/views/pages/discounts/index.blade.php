@@ -1,7 +1,23 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="text-xl font-semibold leading-tight text-gray-800">
-            {{ __('navigation.discounts') }}
+        <h2 class="grid grid-cols-4 text-xl font-semibold leading-tight text-gray-800">
+            <div class="flex items-center col-span-1">
+                {{ __('navigation.discounts') }}
+            </div>
+            <div class="flex items-center justify-end col-span-3 m-0">
+                @role('seller|admin')
+                    <x-modal text="{{ __('navigation.export') }}" identification="export" route="{{route('discount.list')}}" >
+                    </x-modal>
+
+                    <x-modal text="{{ __('navigation.import') }}" identification="import" route="{{route('discount.list')}}" >
+                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">{{ __('form.fileExcel') }}</label>
+                        <input class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="file_input_help" id="file_input" type="file">
+                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF.</p>
+                    </x-modal>
+
+                    <livewire:button-default text="{{ __('navigation.create') }}" link="{{ route('discount.create') }}">
+                @endrole
+            </div>
         </h2>
     </x-slot>
 
