@@ -48,6 +48,7 @@ return [
     'ends_with' => 'O campo :attribute deve terminar com um dos seguintes: :values',
     'enum' => 'O :attribute selecionado é inválido.',
     'exists' => 'O campo :attribute selecionado é inválido.',
+    'existsProduct' => 'Verifique se o sku informado existe.',
     'file' => 'O campo :attribute deve ser um arquivo.',
     'filled' => 'O campo :attribute deve ter um valor.',
     'gt' => [
@@ -106,11 +107,11 @@ return [
         'numbers' => 'O campo :attribute deve conter pelo menos um número.',
         'symbols' => 'O campo :attribute deve conter pelo menos um símbolo.',
         'uncompromised' => 'A senha que você inseriu em :attribute está em um vazamento de dados.'
-                              .' Por favor escolha uma senha diferente.',
+            .' Por favor escolha uma senha diferente.',
     ],
     'present' => 'O campo :attribute deve estar presente.',
     'regex' => 'O campo :attribute tem um formato inválido.',
-    'required' => 'O campo :attribute é obrigatório.',
+    'required' => 'O campo é obrigatório.',
     'required_array_keys' => 'O campo :attribute deve conter entradas para: :values.',
     'required_if' => 'O campo :attribute é obrigatório quando :other for :value.',
     'required_unless' => 'O campo :attribute é obrigatório exceto quando :other for :values.',

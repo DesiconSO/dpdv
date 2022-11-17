@@ -33,6 +33,26 @@ class DiscountTable extends DataTableComponent
             Column::make('Discount', 'discount'),
             Column::make('Updated at', 'updated_at')
                 ->sortable(),
+            Column::make('Actions')
+                ->label(
+                    function ($row) {
+                        $delete = '<button class="px-2 py-1 m-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" wire:click="delete('.$row->id.')">Excluir</button>';
+
+                        return $delete;
+                    }
+                )->html(),
         ];
+    }
+
+    public function delete(Discount $discount)
+    {
+        if ($discount->delete()) {
+            session()->flash('success', 'Desconto excluído com sucesso!');
+
+            return redirect()->route('discount.index');
+        }
+        session()->flash('error', __('form.error'));
+
+        return redirect()->route('discount.index');
     }
 }

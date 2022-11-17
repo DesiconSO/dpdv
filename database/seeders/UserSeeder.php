@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
     public function run()
     {
         $adminRole = Role::create(['name' => 'admin']);
-        $sellerRole = Role::create(['name' => 'saller']);
+        $sellerRole = Role::create(['name' => 'seller']);
         $userRole = Role::create(['name' => 'user']);
 
         Permission::create(['name' => 'create client']);
@@ -65,11 +65,18 @@ class UserSeeder extends Seeder
         $user->assignRole($sellerRole);
 
         $user = User::create([
-            'name' => 'Teste Testes',
-            'email' => 'test@test.com',
+            'name' => 'Teste Seller',
+            'email' => 'test@seller.com',
             'password' => bcrypt('test123'),
         ]);
         $user->assignRole($sellerRole);
+
+        $user = User::create([
+            'name' => 'Teste User',
+            'email' => 'test@user.com',
+            'password' => bcrypt('test123'),
+        ]);
+        $user->assignRole($userRole);
 
         // Users >>>>>>>>
     }

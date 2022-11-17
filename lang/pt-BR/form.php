@@ -22,10 +22,14 @@ return [
     'fu' => 'UF',
     'observation' => 'Observação',
     'seller' => 'Vendedor',
+    'max_amount' => 'Quantidade máxima',
 
     'first_select' => 'Selecione uma das opções...',
     'fileExcel' => 'Envie o arquivo com os descontos',
     'success' => 'Ocorreu tudo de acordo com o planejado!',
+    'discount' => 'Desconto',
+    'destroy' => 'Excluir',
+    'error' => 'Ocorreu um erro inesperado!',
 
     'enums' => [
         'contributor' => [

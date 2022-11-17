@@ -13,7 +13,7 @@ class Discount extends Model
         'max_amount',
         'discount',
         'user_id',
-        'product_id'
+        'product_id',
     ];
 
     protected $cast = [];

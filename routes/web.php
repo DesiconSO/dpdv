@@ -26,18 +26,28 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+    Route::get('discount/export', [DiscountController::class, 'export'])->name('discount.export');
+    Route::post('discount/import', [DiscountController::class, 'import'])->name('discount.import');
+
     Route::resources(
         [
-            'client' => ClientController::class,
             'proposal' => ProposalController::class,
             'product' => ProductController::class,
             'discount' => DiscountController::class,
         ]
     );
-
-    Route::post('/send', [DiscountController::class, 'DiscountList'])->name('discount.list');
 });
 
-Route::get('/teste', [ProductController::class, 'teste']);
+Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin|seller']], function () {
+    Route::resources(
+        [
+            'client' => ClientController::class,
+        ]
+    );
+});
 
-require __DIR__.'/auth.php';
+Route::get('/teste', function () {
+    dd();
+});
+
+require __DIR__ . '/auth.php';

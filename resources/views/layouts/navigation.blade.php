@@ -15,15 +15,21 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
                     <x-nav-link :href="route('product.index')" :active="request()->routeIs('product*')">
                         {{ __('navigation.products') }}
                     </x-nav-link>
+
                     <x-nav-link :href="route('proposal.index')" :active="request()->routeIs('proposal*')">
                         {{ __('navigation.proposals') }}
                     </x-nav-link>
+
+                    @role('admin|seller')
                     <x-nav-link :href="route('client.index')" :active="request()->routeIs('client*')">
                         {{ __('navigation.clients') }}
                     </x-nav-link>
+                    @endrole
+
                     <x-nav-link :href="route('discount.index')" :active="request()->routeIs('discount*')">
                         {{ __('navigation.discounts') }}
                     </x-nav-link>
@@ -49,7 +55,9 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
+                            <div class="block px-4 py-2 font-semibold leading-5 text-gray-700 text-md">
+                                {{ ucfirst(auth()->user()->getRoleNames()->first()) }}
+                            </div>
                             <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
@@ -86,9 +94,11 @@
                 {{ __('navigation.proposals') }}
             </x-responsive-nav-link>
 
+            @role('admin|seller')
             <x-responsive-nav-link :href="route('client.index')" :active="request()->routeIs('client*')">
                 {{ __('navigation.clients') }}
             </x-responsive-nav-link>
+            @endrole
 
             <x-responsive-nav-link :href="route('discount.index')" :active="request()->routeIs('discount*')">
                 {{ __('navigation.discounts') }}
@@ -106,7 +116,9 @@
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-
+                    <x-responsive-nav-link>
+                        {{ __('Log Out') }}
+                    </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('logout')" onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
