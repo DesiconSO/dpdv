@@ -21,6 +21,5 @@ class RegistrationScreen extends Component
 
     public function submit()
     {
-        dd('teste');
     }
 }

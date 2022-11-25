@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProposalController;
+use App\Http\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,11 +22,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+    Route::get('/', Dashboard::class)->name('dashboard');
     Route::get('discount/export', [DiscountController::class, 'export'])->name('discount.export');
     Route::post('discount/import', [DiscountController::class, 'import'])->name('discount.import');
 
@@ -47,7 +46,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin|seller']], f
 });
 
 Route::get('/teste', function () {
-    dd();
 });
 
 require __DIR__ . '/auth.php';

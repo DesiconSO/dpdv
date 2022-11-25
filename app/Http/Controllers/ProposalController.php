@@ -27,7 +27,7 @@ class ProposalController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.proposals.create');
     }
 
     /**

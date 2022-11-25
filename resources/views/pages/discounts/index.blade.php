@@ -6,16 +6,18 @@
             </div>
             <div class="flex items-center justify-end col-span-3 m-0">
                 @role('seller|admin')
+                <div class="mr-2">
                     <livewire:button-default text="{{ __('navigation.export') }}" link="{{ route('discount.export') }}">
+                </div>
 
-                    <x-modal text="{{ __('navigation.import') }}" identification="import" route="{{route('discount.import')}}" >
-                        <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">{{ __('form.fileExcel') }}</label>
-                        <input aria-describedby="file_input_help" name="file_input" id="file_input" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
-                        <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">SVG, PNG, JPG or GIF.</p>
-                    </x-modal>
+                <x-modal text="{{ __('navigation.import') }}" identification="import" route="{{route('discount.import')}}">
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">{{ __('form.fileExcel') }}</label>
+                    <input aria-describedby="file_input_help" name="file_input" id="file_input" type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">.xsls</p>
+                </x-modal>
 
-                    <livewire:button-default text="{{ __('navigation.create') }}" link="{{ route('discount.create') }}">
-                @endrole
+                <livewire:button-default text="{{ __('navigation.create') }}" link="{{ route('discount.create') }}">
+                    @endrole
             </div>
         </h2>
     </x-slot>

@@ -32,27 +32,27 @@
         <!-- Page Content -->
         <main>
             @if(Session::has('success'))
-                <div class="flex items-center justify-center p-4 mt-4 -mb-8 text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
-                    <span class="text-base"> {{ Session::get('success') }} </span>
-                </div>
+            <div class="flex items-center justify-center p-4 mt-4 -mb-8 text-green-700 bg-green-100 rounded-lg dark:bg-green-200 dark:text-green-800" role="alert">
+                <span class="text-base"> {{ Session::get('success') }} </span>
+            </div>
             @endif
 
             @if(Session::has('fail'))
-                <div class="flex items-center justify-center p-4 mt-4 -mb-8 text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
-                    <span class="text-base"> {{ Session::get('fail') }} </span>
-                </div>
+            <div class="flex items-center justify-center p-4 mt-4 -mb-8 text-red-700 bg-red-100 rounded-lg dark:bg-red-200 dark:text-red-800" role="alert">
+                <span class="text-base"> {{ Session::get('fail') }} </span>
+            </div>
             @endif
 
             @if(Session::has('pending'))
-                <div class="flex items-center justify-center p-4 mt-4 -mb-8 text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
-                    <span class="text-base"> {{ Session::get('pending') }} </span>
-                </div>
+            <div class="flex items-center justify-center p-4 mt-4 -mb-8 text-yellow-700 bg-yellow-100 rounded-lg dark:bg-yellow-200 dark:text-yellow-800" role="alert">
+                <span class="text-base"> {{ Session::get('pending') }} </span>
+            </div>
             @endif
 
             @if(Session::has('alert'))
-                <div class="flex items-center justify-center p-4 mt-4 -mb-8 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800" role="alert">
-                    <span class="text-base"> {{ Session::get('alert') }} </span>
-                </div>
+            <div class="flex items-center justify-center p-4 mt-4 -mb-8 text-sm text-blue-700 bg-blue-100 rounded-lg dark:bg-blue-200 dark:text-blue-800" role="alert">
+                <span class="text-base"> {{ Session::get('alert') }} </span>
+            </div>
             @endif
 
             {{ $slot }}
@@ -60,6 +60,7 @@
     </div>
     @livewireScripts
     <script src="https://unpkg.com/flowbite@1.5.3/dist/flowbite.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js" charset="utf-8"></script>
 </body>
 
 </html>

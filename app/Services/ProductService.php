@@ -16,4 +16,8 @@ class ProductService
             ->throw()
             ->json();
     }
+
+    public function get()
+    {
+    }
 }

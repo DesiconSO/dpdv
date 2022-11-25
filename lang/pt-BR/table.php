@@ -14,4 +14,8 @@ return [
     'city' => 'Cidade',
     'money' => 'R$',
     'delete' => 'Deletar',
+    'edit' => 'Editar',
+    'parcel_day' => 'Dia da parcela',
+    'parcel_price' => 'Valor da parcela',
+    'payment_parcel' => 'Forma de pagamento',
 ];

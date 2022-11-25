@@ -22,8 +22,8 @@ class ProposalFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => Factory::factoryForModel(User::class),
-            'client_id' => Factory::factoryForModel(Client::class),
+            'user_id' => User::all()->random()->id,
+            'client_id' => Client::all()->random()->id,
             'shipping_company' => $this->faker->company(),
             'sale_mode' => $this->faker->randomElement(SaleMode::cases()),
             'shipping_mode' => $this->faker->randomElement(ShippingMode::cases()),
@@ -31,6 +31,7 @@ class ProposalFactory extends Factory
             'shipping_price' => $this->faker->randomFloat(2, 5, 2000),
             'seller_note' => $this->faker->sentence(6),
             'status' => $this->faker->randomElement(StatusProposal::cases()),
+            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }

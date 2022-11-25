@@ -1,13 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <div class="flex justify-between">
+        <div class="flex items-center justify-between">
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 {{ __('navigation.clients') }}
             </h2>
 
-            @role('seller|admin')
+            <div>
+                @role('seller|admin')
                 <livewire:button-default text="{{ __('navigation.create') }}" link="{{ route('client.create') }}">
-                @endrole
+                    @endrole
+            </div>
         </div>
     </x-slot>
 
