@@ -47,6 +47,7 @@ return [
     'payment_parcel placeholder' => 'Forma de pagamento',
     'description_parcel' => 'Descrição da parcela',
     'description_parcel placeholder' => 'Descrição da parcela',
+    'shippingMode' => 'Modo de envio',
 
     'shipping_company' => 'Transportadora',
     'sale_mode' => 'Modo de venda',

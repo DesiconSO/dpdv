@@ -20,4 +20,9 @@ class Product extends Model
     protected $cast = [];
 
     public $timestamps = false;
+
+    public function discount()
+    {
+        return $this->hasMany(Discount::class);
+    }
 }

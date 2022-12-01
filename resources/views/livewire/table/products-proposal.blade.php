@@ -29,10 +29,10 @@
                         Preço UN
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        D.Difal
+                        D.Escalonado
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        D.Escalonado
+                        D.Difal
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Total
@@ -45,30 +45,26 @@
                 @foreach ($products as $item)
                 <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                     <td class="px-6 py-4">
-                        {{ $item[0]['codigo'] }}
+                        {{ $item['product']['codigo'] }}
                     </td>
                     <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                        {{ mb_strimwidth($item[0]['descricao'], 0, 30, "...")  }}
+                        {{ mb_strimwidth($item['product']['descricao'], 0, 30, "...")  }}
                     </th>
                     <td class="px-6 py-4">
-                        {{ $item[1] }}
+                        {{ $item['amount'] }}
 
                     </td>
                     <td class="px-6 py-4">
-                        {{ $item[0]['preco'] }}
-
+                        {{ 'R$ ' . number_format($item['product']['preco'], 2) }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $item[0]['codigo'] }}
-
+                        {{ 'R$ ' . number_format($item['staggeredDiscount'], 2) }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ $item[0]['codigo'] }}
-
+                        {{ $item['difal'] . '%' }}
                     </td>
                     <td class="px-6 py-4">
-                        {{ (int) $item[0]['preco'] * (int) $item[1] }}
-
+                        {{ 'R$ ' . number_format($item['totalWithDiscouts'], 2) }}
                     </td>
                     <td class="px-6 py-4">
                         <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Remover</a>

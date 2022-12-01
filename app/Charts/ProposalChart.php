@@ -42,6 +42,7 @@ class ProposalChart extends Chart
         $this->dataset('Aceitas', 'bar', $dados[0][0])
             ->options([
                 'backgroundColor' => 'rgba(56, 203, 137, 0.6)',
+                'responsive' => true,
             ]);
         $this->dataset('Pendentes', 'bar', $dados[0][2])
             ->options([

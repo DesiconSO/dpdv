@@ -21,7 +21,6 @@
     <div class="">
         <x-input-label for="payment_parcel" :value="__('form.payment_parcel')" class="" />
 
-
         <x-text-input id="payment_parcel" class="w-full mt-2" type="text" name="payment_parcel" wire:model.lazy='payment_parcel' :value="old('payment_parcel')" :placeholder="__('form.payment_parcel placeholder')" />
 
         <x-input-error :messages="$errors->get('payment_parcel')" class="col-span-12 mt-2" />
@@ -53,6 +52,8 @@
                     </th>
                     <th scope="col" class="px-6 py-3">
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -62,7 +63,11 @@
                         {{ $item['parcel_day'] }}
                     </th>
                     <td class="px-6 py-4">
-                        {{ 'R$ '.$item['parcel_price'] }}
+                        @if ($loop->index > 0)
+                        {{ 'R$ '.number_format($parcelsPrice, 2, '.', '') }}
+                        @else
+                        {{ 'R$ '.number_format($item['parcel_price'], 2, '.', '') }}
+                        @endif
                     </td>
                     <td class="px-6 py-4">
                         {{ $item['payment_parcel'] }}

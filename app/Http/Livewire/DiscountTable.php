@@ -3,17 +3,20 @@
 namespace App\Http\Livewire;
 
 use App\Models\Discount;
+use Livewire\WithPagination;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 
 class DiscountTable extends DataTableComponent
 {
+    use WithPagination;
     protected $model = Discount::class;
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
-        $this->setSingleSortingDisabled();
+        $this->setPrimaryKey('id')
+            ->setHideReorderColumnUnlessReorderingEnabled()
+            ->setSingleSortingDisabled();
     }
 
     public function columns(): array
@@ -26,8 +29,9 @@ class DiscountTable extends DataTableComponent
                 ->searchable()
                 ->sortable(),
             Column::make('SKU', 'product.sku')
+                ->sortable()
                 ->searchable()
-                ->sortable(),
+                ->setSortingPillDirections('0-9', '9-0'),
             Column::make('Max amount', 'max_amount')
                 ->sortable(),
             Column::make('Discount', 'discount'),
@@ -36,7 +40,7 @@ class DiscountTable extends DataTableComponent
             Column::make('Actions')
                 ->label(
                     function ($row) {
-                        $delete = '<button class="px-2 py-1 m-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" wire:click="delete('.$row->id.')">Excluir</button>';
+                        $delete = '<button class="px-2 py-1 m-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" wire:click="delete(' . $row->id . ')">Excluir</button>';
 
                         return $delete;
                     }
