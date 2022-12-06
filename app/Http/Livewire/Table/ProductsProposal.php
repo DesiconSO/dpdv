@@ -16,8 +16,9 @@ class ProductsProposal extends Component
     public $sku;
     public $amount;
     public array $products;
+    public $saleMode;
 
-    protected $listeners = ['productAdded' => 'setProducts', 'clientChanged' => 'setClient'];
+    protected $listeners = ['productAdded' => 'setProducts', 'clientChanged' => 'setClient', 'saleModeChanged' => 'setSaleMode'];
 
     public function mount(array $products)
     {
@@ -39,8 +40,30 @@ class ProductsProposal extends Component
         $this->client = $client;
     }
 
+    public function setSaleMode($saleMode)
+    {
+        $this->saleMode = $saleMode;
+    }
+
+    protected $rules = [
+        'client' => 'required|min:6',
+        'sku' => 'required|string',
+        'amount' => 'required|numeric',
+        'saleMode' => 'required',
+        'products' => 'array',
+    ];
+
+    protected $messages = [
+        'client.required' => 'O campo "Identificação do cliente" é obrigatório.',
+        'sku.required' => 'O campo "Dados do produto" é obrigatório.',
+        'amount.required' => 'O campo "Quantidade" é obrigatório.',
+        'saleMode.required' => 'O campo "Modo de venda" é obrigatório.',
+    ];
+
     public function searchProduct()
     {
+        $this->validate();
+
         $response = Http::bling([])->get("produto/{$this->sku}/json/");
         $product = $response['retorno']['produtos'][0]['produto'];
         $client = Client::all()->where('cpf_cnpj', '==', '57.175.996/0001-93')->first();

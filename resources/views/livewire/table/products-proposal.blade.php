@@ -1,6 +1,14 @@
 <div>
     <div class="">
         <div class="w-full mb-4">
+            @if (count($errors) > 0)
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li class="space-y-1 text-sm font-thin text-red-600">{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
+
             <x-input-label for="sku" :value="__('form.product data')" class="" />
             <div class="grid grid-cols-12 gap-4 mt-2">
                 <x-text-input id="sku" class="w-full col-span-7" type="text" name="sku" wire:model.lazy='sku' :placeholder="__('form.sku identification placeholder')" autofocus />
@@ -8,8 +16,6 @@
 
                 <button wire:click.prevent="searchProduct" class="flex justify-center w-full col-span-2 text-white bg-blue-500 hover:bg-blue-600 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Adicionar</button>
             </div>
-
-            <x-input-error :messages="$errors->get('sku')" class="col-span-12 mt-2" />
         </div>
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">

@@ -3,12 +3,25 @@
     <div class="grid grid-cols-12 gap-4 p-6 mb-4 bg-white border-b border-gray-200 ">
         <h2 class="col-span-12">Dados Cliente</h2>
         <!-- Name -->
-        <div class="w-full col-span-12 ">
+        <div class="w-full col-span-8 ">
             <x-input-label for="client" :value="__('form.client identification')" class="" />
 
             <x-text-input id="client" wire:change.defer="changeClient" class="w-full mt-2" type="text" name="client" wire:model.defer='client' :value="old('client')" :placeholder="__('form.client identification placeholder')" autofocus />
 
             <x-input-error :messages="$errors->get('client')" class="col-span-12 mt-2" />
+        </div>
+
+        <div class="w-full col-span-4">
+            <x-input-label for="saleMode" :value="__('form.saleMode')" />
+
+            <x-select-input class="block w-full mt-1 text-slate-600" wire:change.defer="changeSaleMode" name="saleMode" wire:model.lazy='saleMode' :value="old('saleMode')">
+                <option value="" class="text-slate-600">{{ __('form.first_select') }}</option>
+                @foreach ($saleModeState as $item)
+                <option value="{{ $item->value }}" class="text-slate-600">{{ $item->data() }}</option>
+                @endforeach
+            </x-select-input>
+
+            <x-input-error :messages="$errors->get('saleMode')" class="mt-2" />
         </div>
     </div>
 
@@ -16,7 +29,7 @@
         <h2 class="col-span-12">Dados Produtos</h2>
 
         <div class="col-span-12">
-            <livewire:table.products-proposal :products="$products" :client="$client" />
+            <livewire:table.products-proposal :products="$products" :client="$client" :saleMode="$saleMode" />
         </div>
     </div>
     <!-- @if (isset($client)) -->
@@ -38,8 +51,8 @@
 
                 <x-select-input id="shippingMode" class="block w-full mt-1 text-slate-600" name="shippingMode" wire:model.lazy='shippingMode' :value="old('shippingMode')">
                     <option value="" class="text-slate-600">{{ __('form.first_select') }}</option>
-                    @foreach ($shippingMode as $item)
-                    <option value="{{ $item->value }}" class="text-slate-600">{{ $item->data() }}</option>
+                    @foreach ($shippingModeState as $item)
+                    <option value="{{ $item }}" class="text-slate-600">{{ $item->data() }}</option>
                     @endforeach
                 </x-select-input>
 

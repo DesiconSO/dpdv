@@ -11,8 +11,6 @@ class CreateProposalForm extends Component
 {
     public $client;
     public $shipping_company;
-    public $sale_mode;
-    public $shipping_mode;
     public $seller_discount;
     public $shipping_price;
     public $seller_note;
@@ -60,13 +58,19 @@ class CreateProposalForm extends Component
         }
     }
 
+    public function changeSaleMode()
+    {
+        $this->emit('saleModeChanged', $this->saleMode);
+    }
+
     public function render()
     {
-        $this->shippingMode = ShippingMode::cases();
-        $this->saleMode = SaleMode::cases();
+        $shippingModeState = ShippingMode::cases();
+        $saleModeState = SaleMode::cases();
 
         return view(
             'livewire.form.create-proposal-form',
+            compact('shippingModeState', 'saleModeState')
         );
     }
 }

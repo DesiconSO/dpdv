@@ -82,8 +82,6 @@ class CreateClientForm extends Component
         $contributors = Contributor::cases();
         $taxRegimeCodes = TaxRegimeCode::cases();
 
-        $this->personTypeCases();
-
         return view(
             'livewire.create-client-form',
             compact([
@@ -114,27 +112,6 @@ class CreateClientForm extends Component
             session()->flash('message', 'Erro ao cadastrar cliente!');
 
             return redirect()->route('client.index');
-        }
-    }
-
-    public function personTypeCases()
-    {
-        if ($this->person_type === PersonType::PHYSICAL) {
-            return true;
-        }
-
-        switch ($this->person_type) {
-            case PersonType::PHYSICAL:
-                dd('Pessoa Física');
-                break;
-
-            case PersonType::LEGAL:
-                dd('Pessoa Jurídica');
-                break;
-
-            case PersonType::STRANGE:
-                dd('Pessoa Estrangeira');
-                break;
         }
     }
 }

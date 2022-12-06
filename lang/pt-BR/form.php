@@ -48,6 +48,7 @@ return [
     'description_parcel' => 'Descrição da parcela',
     'description_parcel placeholder' => 'Descrição da parcela',
     'shippingMode' => 'Modo de envio',
+    'saleMode' => 'Modo de venda',
 
     'shipping_company' => 'Transportadora',
     'sale_mode' => 'Modo de venda',
