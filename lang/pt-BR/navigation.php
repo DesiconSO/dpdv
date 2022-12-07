@@ -9,4 +9,6 @@ return [
     'import' => 'Importar',
     'export' => 'Exportar',
     'close' => 'Fechar',
+    'manager' => 'Gerenciar',
+    'user' => 'Usuários',
 ];

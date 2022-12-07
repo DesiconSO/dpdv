@@ -4,6 +4,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProposalController;
+use App\Http\Controllers\UserController;
 use App\Http\Livewire\Dashboard;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin|seller']], f
             'client' => ClientController::class,
         ]
     );
+});
+
+Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin']], function () {
+    Route::resource('user', UserController::class);
 });
 
 Route::get('/teste', function () {

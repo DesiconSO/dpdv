@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Client;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -11,6 +12,7 @@ use Illuminate\Support\Str;
  */
 class UserFactory extends Factory
 {
+
     /**
      * Define the model's default state.
      *
@@ -28,6 +30,13 @@ class UserFactory extends Factory
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
+    }
+
+    public function configure()
+    {
+        return $this->afterCreating(function (User $user) {
+            $user->assignRole('user');
+        });
     }
 
     /**

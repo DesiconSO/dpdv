@@ -7,8 +7,11 @@
 
             <div>
                 @role('seller|admin')
-                <livewire:button-default text="{{ __('navigation.create') }}" link="{{ route('client.create') }}">
-                    @endrole
+                <livewire:button-default text="{{ __('navigation.create') }}" link="{{ route('client.create') }}" />
+                @endrole
+                @role('admin')
+                <livewire:button-default text="{{ __('navigation.user') }}" link="{{ route('user.index') }}" />
+                @endrole
             </div>
         </div>
     </x-slot>
