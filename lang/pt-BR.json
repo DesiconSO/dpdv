@@ -119,5 +119,10 @@
     "Regenerate Recovery Codes": "Gerar novamente os códigos de recuperação",
     "Show Recovery Codes": "Mostrar os códigos de recuperação",
     "Disable": "Desabilitar",
-    "Products": "Produtos"
+    "Products": "Produtos",
+
+    "Are you sure you want to delete this?": "Você tem certeza que deseja deletar isso?",
+    "Close modal": "Fechar modal",
+    "Yes, Im sure": "Sim, tenho certeza",
+    "No, cancel": "Não, cancelar"
 }

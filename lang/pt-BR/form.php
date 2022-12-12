@@ -66,6 +66,10 @@ return [
     'seller_note placeholder' => 'Observação do vendedor',
     'status placeholder' => 'Status',
     'seller_note placeholder' => 'Observação do vendedor',
+    'change user role' => 'Edite o cargo do usuário',
+    'delete' => 'Remover',
+    'user_changed' => 'O usuário foi alterado com sucesso!',
+    'user_deleted' => 'O usuário foi removido com sucesso!',
 
     'enums' => [
         'contributor' => [

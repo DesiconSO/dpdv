@@ -2,30 +2,37 @@
 
 namespace App\Http\Livewire\Table;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
+use App\Enums\UserRoles;
 use App\Models\User;
+use Livewire\Component;
 
-class UserTable extends DataTableComponent
+class UserTable extends Component
 {
-    protected $model = User::class;
+    public $userRole;
 
-    public function configure(): void
+    public function render()
     {
-        $this->setPrimaryKey('id');
+        $userRoles = UserRoles::cases();
+
+        $users = User::with('roles')->paginate(20);
+        return view('livewire.table.user-table', compact('users', 'userRoles'));
     }
 
-    public function columns(): array
+    public function changeRole(User $user, $value)
     {
-        return [
-            Column::make("Id", "id")
-                ->sortable(),
-            Column::make("Name", "name")
-                ->sortable(),
-            Column::make("Email", "email")
-                ->sortable(),
-            Column::make("Cargo", "roles.name")
-                ->sortable(),
-        ];
+        if (is_null($user->getRoleNames()->first())) {
+            $user->assignRole($value);
+            return redirect()->route('user.index')->with('success', __('form.user_changed'));
+        } elseif ($value != $user->getRoleNames()->first() || !is_null($user->getRoleNames()->first())) {
+            $user->removeRole($user->getRoleNames()->first());
+            $user->assignRole($value);
+            return redirect()->route('user.index')->with('success', __('form.user_changed'));
+        }
+    }
+
+    public function removeUser(User $user)
+    {
+        $user->delete();
+        return redirect()->route('user.index')->with('success', __('form.user_deleted'));
     }
 }
