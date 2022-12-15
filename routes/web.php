@@ -23,7 +23,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
 Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::get('/', Dashboard::class)->name('dashboard');
     Route::get('discount/export', [DiscountController::class, 'export'])->name('discount.export');
@@ -53,4 +52,4 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin']], function
 Route::get('/teste', function () {
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

@@ -16,7 +16,7 @@ class ProductTable extends DataTableComponent
     {
         $this->setPrimaryKey('id');
 
-        $this->setEmptyMessage(__('table.no_data'));
+        $this->setEmptyMessage(__('No results found'));
     }
 
     public function columns(): array

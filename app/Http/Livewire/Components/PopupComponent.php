@@ -8,6 +8,7 @@ use Livewire\Component;
 class PopupComponent extends Component
 {
     public $text;
+
     public User $userData;
 
     public function render()

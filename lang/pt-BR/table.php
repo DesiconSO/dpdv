@@ -20,4 +20,10 @@ return [
     'payment_parcel' => 'Forma de pagamento',
     'role' => 'Cargo',
     'id' => 'ID',
+    'user' => 'Usuário',
+    'sku' => 'SKU',
+    'Max amount' => 'Quantidade máxima',
+    'discount' => 'Desconto',
+    'actions' => 'Ações',
+    'updated at' => 'Última atualização',
 ];

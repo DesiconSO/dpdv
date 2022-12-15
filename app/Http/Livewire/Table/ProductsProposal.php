@@ -13,12 +13,23 @@ class ProductsProposal extends Component
     use DifalTrait, StaggeredDiscountTrait;
 
     public $client;
+
     public $sku;
+
     public $amount;
+
     public array $products;
+
     public $saleMode;
 
-    protected $listeners = ['productAdded' => 'setProducts', 'clientChanged' => 'setClient', 'saleModeChanged' => 'setSaleMode'];
+    public $NFE;
+
+    protected $listeners = [
+        'productAdded' => 'setProducts',
+        'clientChanged' => 'setClient',
+        'saleModeChanged' => 'setSaleMode',
+        'NFEChanged' => 'setNFE',
+    ];
 
     public function mount(array $products)
     {
@@ -28,6 +39,15 @@ class ProductsProposal extends Component
     public function render()
     {
         return view('livewire.table.products-proposal');
+    }
+
+    public function setNFE($NFE)
+    {
+        if ($NFE == '1') {
+            $this->NFE = true;
+        } else {
+            $this->NFE = false;
+        }
     }
 
     public function setProducts(array $products)
@@ -51,6 +71,7 @@ class ProductsProposal extends Component
         'amount' => 'required|numeric',
         'saleMode' => 'required',
         'products' => 'array',
+        'NFE' => 'boolean',
     ];
 
     protected $messages = [
@@ -66,14 +87,14 @@ class ProductsProposal extends Component
 
         $response = Http::bling([])->get("produto/{$this->sku}/json/");
         $product = $response['retorno']['produtos'][0]['produto'];
-        $client = Client::all()->where('cpf_cnpj', '==', '57.175.996/0001-93')->first();
+        $client = Client::all()->where('cpf_cnpj', '==', $this->client['cpf_cnpj'])->first();
 
         // Calculete Difal
         $difalDiscount = $this->getDifal(
             $product,
             $client,
-            1,
-            true
+            $this->NFE,
+            $this->saleMode
         );
 
         // Calculete Staggered Discount

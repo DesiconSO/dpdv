@@ -2,12 +2,12 @@
 
 namespace App\Enums;
 
-enum UserRoles: string
+enum UserRoles: int
 {
-    case USER = '1';
-    case ADMIN = '2';
-    case SELLER = '3';
-    case GUEST = '0';
+    case GUEST = 0;
+    case USER = 1;
+    case ADMIN = 2;
+    case SELLER = 3;
 
     public function data(): string
     {

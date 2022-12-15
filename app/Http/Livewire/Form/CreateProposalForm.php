@@ -3,32 +3,42 @@
 namespace App\Http\Livewire\Form;
 
 use App\Enums\SaleMode;
+use App\Enums\ShippingCompany;
 use App\Enums\ShippingMode;
+use App\Enums\StatusProposal;
 use App\Models\Client;
+use App\Models\Proposal;
 use Livewire\Component;
 
 class CreateProposalForm extends Component
 {
     public $client;
+
     public $shipping_company;
+
     public $seller_discount;
+
     public $shipping_price;
+
     public $seller_note;
+
     public $status;
-    public $payment_method;
-    public $payment_condition;
-    public $payment_value;
-    public $payment_discount;
-    public $parcel_price;
-    public $description_parcel;
+
     public $shippingMode;
+
     public $saleMode;
+
     public $NFE;
 
-    public $products = array();
-    public $parcels = array();
+    public $products = [];
 
-    protected $listeners = ['productAdded' => 'setProducts', 'parcelsAdded' => 'setParcels'];
+    public $parcels = [];
+
+    protected $listeners = [
+        'productAdded' => 'setProducts',
+        'parcelsAdded' => 'setParcels',
+        'onlyOneParcel' => 'setOnlyOneParcel',
+    ];
 
     public function setProducts(array $products)
     {
@@ -39,6 +49,20 @@ class CreateProposalForm extends Component
     {
         $this->parcels = $parcels;
     }
+
+    protected $rules = [
+        'client' => 'required',
+        'shipping_company' => 'required',
+        'seller_discount' => 'required|numeric',
+        'shipping_price' => 'required|numeric',
+        'seller_note' => '',
+        'status' => '',
+        'shippingMode' => 'required',
+        'saleMode' => 'required',
+        'products' => 'array',
+        'parcels' => 'array',
+        'NFE' => 'boolean|required',
+    ];
 
     public function changeSellerDiscount()
     {
@@ -58,6 +82,16 @@ class CreateProposalForm extends Component
         }
     }
 
+    public function setOnlyOneParcel($parcels)
+    {
+        $this->parcels[0] = $parcels;
+    }
+
+    public function changeNFE()
+    {
+        $this->emit('NFEChanged', $this->NFE);
+    }
+
     public function changeSaleMode()
     {
         $this->emit('saleModeChanged', $this->saleMode);
@@ -67,10 +101,37 @@ class CreateProposalForm extends Component
     {
         $shippingModeState = ShippingMode::cases();
         $saleModeState = SaleMode::cases();
+        $shippingCompany = ShippingCompany::cases();
 
         return view(
             'livewire.form.create-proposal-form',
-            compact('shippingModeState', 'saleModeState')
+            compact('shippingModeState', 'saleModeState', 'shippingCompany')
         );
+    }
+
+    public function submit()
+    {
+        if ($this->validate()) {
+            if ($this->parcels == null) {
+                $this->emit('getParcel', $this->parcels);
+            }
+
+            $client = Client::all()->firstWhere('cpf_cnpj', '===', $this->client);
+
+            Proposal::create([
+                'user_id' => auth()->user()->id,
+                'client_id' => $client->id,
+                'shipping_company' => ShippingCompany::from($this->shipping_company)->value,
+                'seller_discount' => $this->seller_discount,
+                'shipping_price' => $this->shipping_price,
+                'seller_note' => $this->seller_note,
+                'status' => StatusProposal::WAITING->value,
+                'shipping_mode' => ShippingMode::from($this->shippingMode)->value,
+                'sale_mode' => SaleMode::from($this->saleMode)->value,
+                'NFE' => $this->NFE,
+            ]);
+
+            return redirect()->route('proposal.index')->with('success', 'Proposta criada com sucesso!');
+        }
     }
 }

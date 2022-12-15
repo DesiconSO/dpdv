@@ -30,7 +30,7 @@ class ClientPurchasesChart extends Chart
             'Paula',
             'Ana',
             'Carlos',
-            'Rayanne'
+            'Rayanne',
         ]);
 
         $this->dataset('Compras', 'bar', [4000, 5000, 3000, 7000, 4000, 5000, 3000, 7000, 4000, 5000, 3000, 7000])

@@ -1,4 +1,16 @@
 <div class="grid grid-cols-5 col-span-12 gap-4">
+    <div class="col-span-5">
+        <x-input-label for="showParcels" :value="__('form.showParcels')" class="" />
+
+        <x-select-input id="showParcels" class="block w-full mt-1 text-slate-600" name="showParcels" wire:model.lazy='showParcels' :value="old('showParcels')">
+            <option value="0" class="text-slate-600" selected>{{ __('form.false') }}</option>
+            <option value="1" class="text-slate-600">{{ __('form.true') }}</option>
+        </x-select-input>
+
+        <x-input-error :messages="$errors->get('showParcels')" class="col-span-12 mt-2" />
+    </div>
+
+    @if ($showParcels == true)
     <div class="">
         <x-input-label for="parcel_day" :value="__('form.parcel_day')" class="" />
 
@@ -10,9 +22,9 @@
     <div class="">
         <x-input-label for="parcel_price" :value="__('form.parcel_price')" class="" />
         @if (count($parcels) >= 1)
-        <x-text-input id="parcel_price" class="w-full mt-2 disabled:bg-slate-200" type="text" name="parcel_price" wire:model.lazy='parcel_price' :value="old('parcel_price')" :placeholder="__('form.parcel_price placeholder')" disabled />
+        <x-text-input id="parcel_price" class="w-full mt-2 disabled:bg-slate-200" type="text" name="parcel_price" wire:model.lazy='parcel_price' :value="old('parcel_price')" placeholder="R$ 0.000,00" disabled />
         @else
-        <x-text-input id="parcel_price" class="w-full mt-2 disabled:bg-slate-200" type="text" name="parcel_price" wire:model.lazy='parcel_price' :value="old('parcel_price')" :placeholder="__('form.parcel_price placeholder')" />
+        <x-text-input id="parcel_price" class="w-full mt-2 disabled:bg-slate-200" type="text" name="parcel_price" wire:model.lazy='parcel_price' :value="old('parcel_price')" placeholder="R$ 0.000,00" />
         @endif
 
         <x-input-error :messages="$errors->get('parcel_price')" class="col-span-12 mt-2" />
@@ -21,7 +33,15 @@
     <div class="">
         <x-input-label for="payment_parcel" :value="__('form.payment_parcel')" class="" />
 
-        <x-text-input id="payment_parcel" class="w-full mt-2" type="text" name="payment_parcel" wire:model.lazy='payment_parcel' :value="old('payment_parcel')" :placeholder="__('form.payment_parcel placeholder')" />
+        <x-select-input id="payment_parcel" class="block w-full mt-2 text-slate-600" name="payment_parcel" wire:model.lazy='payment_parcel' :value="old('payment_parcel')">
+            <option value="" class="text-slate-600">{{ __('form.first_select') }}</option>
+
+            @foreach ($paymentMethods as $key => $item)
+            @if (!is_null($item))
+            <option value="{{ $key }}" class="text-slate-600">{{ $item['formapagamento']['descricao'] }}</option>
+            @endif
+            @endforeach
+        </x-select-input>
 
         <x-input-error :messages="$errors->get('payment_parcel')" class="col-span-12 mt-2" />
     </div>
@@ -83,4 +103,37 @@
             </tbody>
         </table>
     </div>
+    @else
+    <div class="col-span-1">
+        <x-input-label for="parcel_price" :value="__('form.parcel_price')" class="" />
+
+        <x-text-input id="parcel_price" class="w-full mt-2 disabled:bg-slate-200" type="text" name="parcel_price" wire:model.lazy='parcel_price' :value="old('parcel_price')" placeholder="R$ {{ $totalWithDiscouts ? $totalWithDiscouts : '00' }}" disabled />
+
+        <x-input-error :messages="$errors->get('parcel_price')" class="col-span-12 mt-2" />
+    </div>
+
+    <div class="col-span-2">
+        <x-input-label for="payment_parcel" :value="__('form.payment_parcel')" class="" />
+
+        <x-select-input id="payment_parcel" class="block w-full mt-2 text-slate-600" name="payment_parcel" wire:model.lazy='payment_parcel' :value="old('payment_parcel')">
+            <option value="" class="text-slate-600">{{ __('form.first_select') }}</option>
+
+            @foreach ($paymentMethods as $key => $item)
+            @if (!is_null($item))
+            <option value="{{ $key }}" class="text-slate-600">{{ $item['formapagamento']['descricao'] }}</option>
+            @endif
+            @endforeach
+        </x-select-input>
+
+        <x-input-error :messages="$errors->get('payment_parcel')" class="col-span-12 mt-2" />
+    </div>
+
+    <div class="col-span-2">
+        <x-input-label for="description_parcel" :value="__('form.description_payment')" class="" />
+
+        <x-text-input id="description_parcel" class="w-full mt-2" type="text" name="description_parcel" wire:model.lazy='description_parcel' :value="old('description_parcel')" :placeholder="__('form.description_parcel placeholder')" autofocus />
+
+        <x-input-error :messages="$errors->get('description_parcel')" class="col-span-12 mt-2" />
+    </div>
+    @endif
 </div>

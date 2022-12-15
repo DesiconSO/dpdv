@@ -48,3 +48,10 @@ if (! function_exists('unformatText')) {
         return strtolower($value);
     }
 }
+
+if (! function_exists('moneyFormat')) {
+    function moneyFormat($value): string
+    {
+        return 'R$ '.number_format($value, 2, ',', '.');
+    }
+}

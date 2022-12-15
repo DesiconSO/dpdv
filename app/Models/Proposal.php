@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use App\Enums\SaleMode;
+use App\Enums\ShippingCompany;
+use App\Enums\ShippingMode;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -18,12 +21,22 @@ class Proposal extends Model
         'shipping_price',
         'seller_note',
         'status',
+        'user_id',
+        'client_id',
     ];
 
     private $cast = [
-        'shipping_mode' => 'enum',
-        'sale_mode' => 'enum',
+        'shipping_mode' => ShippingMode::class,
+        'sale_mode' => SaleMode::class,
+        'shipping_company' => ShippingCompany::class,
+        'status' => Status::class,
+        'shipping_price' => 'money:USD',
     ];
+
+    public function getShippingPriceAttribute($value)
+    {
+        return moneyFormat($value);
+    }
 
     public function user(): BelongsTo
     {

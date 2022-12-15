@@ -15,6 +15,7 @@ class UserTable extends Component
         $userRoles = UserRoles::cases();
 
         $users = User::with('roles')->paginate(20);
+
         return view('livewire.table.user-table', compact('users', 'userRoles'));
     }
 
@@ -22,10 +23,12 @@ class UserTable extends Component
     {
         if (is_null($user->getRoleNames()->first())) {
             $user->assignRole($value);
+
             return redirect()->route('user.index')->with('success', __('form.user_changed'));
-        } elseif ($value != $user->getRoleNames()->first() || !is_null($user->getRoleNames()->first())) {
+        } elseif ($value != $user->getRoleNames()->first() || ! is_null($user->getRoleNames()->first())) {
             $user->removeRole($user->getRoleNames()->first());
             $user->assignRole($value);
+
             return redirect()->route('user.index')->with('success', __('form.user_changed'));
         }
     }
@@ -33,6 +36,7 @@ class UserTable extends Component
     public function removeUser(User $user)
     {
         $user->delete();
+
         return redirect()->route('user.index')->with('success', __('form.user_deleted'));
     }
 }

@@ -23,6 +23,7 @@ class ClientCreatedChart extends Chart
         $users = $users->map(function ($user) {
             return collect([$user->proposals->count(), $user->name]);
         });
+
         return $users->sortDesc();
     }
 

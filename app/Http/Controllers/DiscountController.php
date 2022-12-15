@@ -106,7 +106,7 @@ class DiscountController extends Controller
             ],
         ]);
 
-        return (new FastExcel($excelExemple))->download('discounts-' . Carbon::now() . '.xlsx');
+        return (new FastExcel($excelExemple))->download('discounts-'.Carbon::now().'.xlsx');
     }
 
     /**

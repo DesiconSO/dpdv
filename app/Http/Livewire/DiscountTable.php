@@ -10,6 +10,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 class DiscountTable extends DataTableComponent
 {
     use WithPagination;
+
     protected $model = Discount::class;
 
     public function configure(): void
@@ -17,30 +18,31 @@ class DiscountTable extends DataTableComponent
         $this->setPrimaryKey('id')
             ->setHideReorderColumnUnlessReorderingEnabled()
             ->setSingleSortingDisabled();
+        $this->setEmptyMessage(__('No results found'));
     }
 
     public function columns(): array
     {
         return [
-            Column::make('Id', 'id')
+            Column::make(__('table.id'), 'id')
                 ->searchable()
                 ->sortable(),
-            Column::make('User', 'user.name')
+            Column::make(__('table.user'), 'user.name')
                 ->searchable()
                 ->sortable(),
-            Column::make('SKU', 'product.sku')
+            Column::make(__('table.sku'), 'product.sku')
                 ->sortable()
                 ->searchable()
                 ->setSortingPillDirections('0-9', '9-0'),
-            Column::make('Max amount', 'max_amount')
+            Column::make(__('table.Max amount'), 'max_amount')
                 ->sortable(),
-            Column::make('Discount', 'discount'),
-            Column::make('Updated at', 'updated_at')
+            Column::make(__('table.discount'), 'discount'),
+            Column::make(__('table.updated at'), 'updated_at')
                 ->sortable(),
-            Column::make('Actions')
+            Column::make('')
                 ->label(
                     function ($row) {
-                        $delete = '<button class="px-2 py-1 m-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" wire:click="delete(' . $row->id . ')">Excluir</button>';
+                        $delete = '<button class="px-2 py-1 m-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" wire:click="delete('.$row->id.')">Excluir</button>';
 
                         return $delete;
                     }

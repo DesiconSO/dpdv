@@ -10,14 +10,12 @@ trait DifalTrait
             $clientType = $this->clientType($client);
 
             if ($clientType == false) {
-
                 /* Verifica se o client é de são paulo */
-                if ($client->uf == "SP") {
-
+                if ($client->uf == 'SP') {
                     /* Verifica se o client quer ou não nota */
                     if ($NFE == false) {
                         /* Pega os produtos que não são ST */
-                        if (!strpos($product['grupoProduto'], 'ST')) {
+                        if (! strpos($product['grupoProduto'], 'ST')) {
                             return 12;
                         } else {
                             return 0;
@@ -29,15 +27,13 @@ trait DifalTrait
                     return 0;
                 }
             } elseif ($clientType == true) {
-
                 /* Verificar se é consumo e ou revenda */
-                if ($sellType == 'consumo') {
-
+                if ($sellType == 0) {
                     return $this->descontoUF($product, $client, $NFE);
-                } elseif ($sellType == 'revenda') {
+                } elseif ($sellType == 1) {
                     // dd(strpos($produto['grupoProduto'], 'ST'));
                     if (strpos($product['grupoProduto'], 'ST') !== false) {
-                        dd("Verificar produto!");
+                        dd('Verificar produto!');
                     } else {
                         return $this->descontoUF($product, $client, $NFE);
                     }
@@ -52,7 +48,6 @@ trait DifalTrait
 
     private function clientType($client)
     {
-
         switch ($client->contribuinte) {
             case '1':
                 return true;
@@ -70,13 +65,11 @@ trait DifalTrait
 
     private function descontoUF($produto, $client, $NFE)
     {
-
-        if ($client->uf == "SP") {
-
+        if ($client->uf == 'SP') {
             /* Verifica se o client quer ou não nota */
             if ($NFE == 'false') {
                 /* Pega os produtos que não são ST */
-                if (!strpos($produto['grupoProduto'], 'ST')) {
+                if (! strpos($produto['grupoProduto'], 'ST')) {
                     return 12;
                 } else {
                     return 0;
@@ -85,7 +78,6 @@ trait DifalTrait
                 return 0;
             }
         } else {
-
             if ($produto['grupoProduto'] == 'Importado' || $produto['grupoProduto'] == 'importado') {
                 if ($client->uf == 'RJ') {
                     return 12;

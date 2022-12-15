@@ -58,13 +58,13 @@ class ProposalChart extends Chart
 
     public function contagemPorMeses($ano)
     {
-        $dadosMeses = array();
+        $dadosMeses = [];
 
         for ($i = 1; $i <= 12; $i++) {
             $dados = Proposal::whereYear('created_at', $ano)->whereMonth('created_at', $i)->get();
-            if (count($dados) == 0)
+            if (count($dados) == 0) {
                 array_push($dadosMeses, 0);
-            else {
+            } else {
                 array_push($dadosMeses, $dados);
             }
         }
@@ -74,11 +74,11 @@ class ProposalChart extends Chart
 
     public function montarDadosPorMeses($dadosMeses)
     {
-        $dados = array();
+        $dados = [];
 
-        $aceitas = array();
-        $pendentes = array();
-        $recusadas = array();
+        $aceitas = [];
+        $pendentes = [];
+        $recusadas = [];
 
         foreach ($dadosMeses as $dadosMes) {
             if ($dadosMes === 0) {
@@ -108,6 +108,7 @@ class ProposalChart extends Chart
         }
 
         array_push($dados, [$aceitas, $recusadas, $pendentes]);
+
         return $dados;
     }
 }

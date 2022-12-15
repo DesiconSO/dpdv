@@ -10,8 +10,8 @@ enum SaleMode: int
     public function data(): string
     {
         return match ($this) {
-            self::SALE => 'Venda',
-            self::RESALE => 'Revenda',
+            self::SALE => 'consumo',
+            self::RESALE => 'revenda',
         };
     }
 }

@@ -49,6 +49,7 @@ return [
     'description_parcel placeholder' => 'Descrição da parcela',
     'shippingMode' => 'Modo de envio',
     'saleMode' => 'Modo de venda',
+    'description_payment' => 'Descrição do pagamento',
 
     'shipping_company' => 'Transportadora',
     'sale_mode' => 'Modo de venda',
@@ -70,6 +71,10 @@ return [
     'delete' => 'Remover',
     'user_changed' => 'O usuário foi alterado com sucesso!',
     'user_deleted' => 'O usuário foi removido com sucesso!',
+    'NFE' => 'Nota Fiscal Eletrônica',
+    'true' => 'Sim',
+    'false' => 'Não',
+    'showParcels' => 'Deseja Parcelar?',
 
     'enums' => [
         'contributor' => [

@@ -2,6 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Enums\SaleMode;
+use App\Enums\ShippingCompany;
+use App\Enums\StatusProposal;
 use App\Models\Proposal;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
@@ -13,6 +16,9 @@ class ProposalTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('id');
+        $this->setEagerLoadAllRelationsStatus(true);
+
+        $this->setEmptyMessage(__('No results found'));
     }
 
     public function columns(): array
@@ -20,23 +26,26 @@ class ProposalTable extends DataTableComponent
         return [
             Column::make('Id', 'id')
                 ->sortable(),
-            Column::make('Shipping company', 'shipping_company')
+            Column::make(__(__('Client')), 'client.name')
+                ->format(fn ($value) => ucwords($value))
                 ->sortable(),
-            Column::make('Sale mode', 'sale_mode')
+            Column::make(__('Status'), 'status')
+                ->format(fn ($value) => ucfirst(StatusProposal::from($value)->data()))
                 ->sortable(),
-            Column::make('Shipping mode', 'shipping_mode')
+            Column::make(__('Shipping company'), 'shipping_company')
+                ->format(fn ($value) => ucfirst(ShippingCompany::from($value)->name()))
                 ->sortable(),
-            Column::make('Seller discount', 'seller_discount')
+            Column::make(__('Sale mode'), 'sale_mode')
+                ->format(fn ($value) => ucfirst(SaleMode::from($value)->data()))
                 ->sortable(),
-            Column::make('Shipping price', 'shipping_price')
+            Column::make(__('Seller discount'), 'seller_discount')
                 ->sortable(),
-            Column::make('Seller note', 'seller_note')
+            Column::make(__('Shipping price'), 'shipping_price')
+                ->format(fn ($value) => $value)
                 ->sortable(),
-            Column::make('Status', 'status')
+            Column::make(__('Seller note'), 'seller_note')
                 ->sortable(),
-            Column::make('Created at', 'created_at')
-                ->sortable(),
-            Column::make('Updated at', 'updated_at')
+            Column::make(__('Updated at'), 'updated_at')
                 ->sortable(),
         ];
     }
