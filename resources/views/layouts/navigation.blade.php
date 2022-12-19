@@ -33,6 +33,12 @@
                     <x-nav-link :href="route('discount.index')" :active="request()->routeIs('discount*')">
                         {{ __('navigation.discounts') }}
                     </x-nav-link>
+
+                    @unlessrole('user|guest')
+                    <x-nav-link :href="route('feedback.index')" :active="request()->routeIs('feedback*')">
+                        {{ __('navigation.feedbacks') }}
+                    </x-nav-link>
+                    @endunlessrole
                 </div>
             </div>
 
@@ -103,6 +109,12 @@
             <x-responsive-nav-link :href="route('discount.index')" :active="request()->routeIs('discount*')">
                 {{ __('navigation.discounts') }}
             </x-responsive-nav-link>
+
+            @role('user|guest')
+            <x-responsive-nav-link :href="route('feedback.index')" :active="request()->routeIs('feedback*')">
+                {{ __('navigation.feedbacks') }}
+            </x-responsive-nav-link>
+            @endrole
         </div>
 
         <!-- Responsive Settings Options -->

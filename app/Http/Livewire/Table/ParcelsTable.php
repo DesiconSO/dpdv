@@ -36,6 +36,14 @@ class ParcelsTable extends Component
         'sellerDiscountChanged' => 'setSellerDiscount',
         'clientChanged' => 'setClient',
         'getParcel' => 'setOnlyOneParcel',
+        'canSubmit' => 'setParcelsToSubmition',
+        'resetParcels' => 'changeShowParcels',
+    ];
+
+    protected $rules = [
+        'parcel_day' => 'required|numeric',
+        'payment_parcel' => 'required',
+        'description_parcel' => '',
     ];
 
     public function mount(array $products, array $parcels, $seller_discount, $client)
@@ -51,7 +59,6 @@ class ParcelsTable extends Component
         $this->getPaymentMethods();
 
         $this->client = $client;
-
         return view('livewire.table.parcels-table');
     }
 
@@ -72,34 +79,66 @@ class ParcelsTable extends Component
         $this->client = $client;
     }
 
+    public function verifyIfHaveParcels()
+    {
+        if (count($this->parcels) > 1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function addParcel()
     {
-        if ($this->showParcels) {
-            $this->parcels[0] = [];
-        } else {
-            if (count($this->parcels) < 12) {
-                if (count($this->parcels) > 0) {
-                    $this->calculateParcelPrice(count($this->parcels), $this->parcels[0]['parcel_price']);
+        if (count($this->parcels) < 12) {
+            if (count($this->parcels) > 0) {
+                $this->calculateParcelPrice(count($this->parcels), $this->parcels[0]['parcel_price']);
 
-                    $this->parcels[] = [
-                        'parcel_day' => $this->parcel_day,
-                        'payment_parcel' => $this->payment_parcel,
-                        'description_parcel' => $this->description_parcel,
-                    ];
-                } else {
+                $this->resetErrorBag();
+
+                $this->validate([
+                    'parcel_day' => 'required|numeric',
+                    'payment_parcel' => 'required',
+                ]);
+
+                $this->parcels[] = [
+                    'parcel_day' => $this->parcel_day,
+                    'payment_parcel' => $this->payment_parcel,
+                    'description_parcel' => $this->description_parcel,
+                ];
+
+                $this->emit('parcelsAdded', $this->parcels);
+            } else {
+                if ($this->parcel_price <= $this->totalWithDiscouts && $this->validate()) {
                     $this->parcels[] = [
                         'parcel_day' => $this->parcel_day,
                         'parcel_price' => $this->parcel_price,
                         'payment_parcel' => $this->payment_parcel,
                         'description_parcel' => $this->description_parcel,
                     ];
+                } else {
+                    $this->emit('addErrorBag', 'O valor da parcela inical não pode ser maior que o valor total do pedido.');
                 }
-
-                $this->reset(['parcel_day', 'parcel_price', 'payment_parcel', 'description_parcel']);
             }
-        }
 
-        $this->emit('parcelsAdded', $this->parcels);
+            $this->reset(['parcel_day', 'parcel_price', 'payment_parcel', 'description_parcel']);
+        } else {
+            $this->emit('addErrorBag', 'O número máximo de parcelas é 12.');
+        }
+    }
+
+    public function setParcelsToSubmition()
+    {
+
+        if ($this->showParcels) {
+            if ($this->verifyIfHaveParcels()) {
+                $this->emit('submitValidation');
+            } else {
+                $this->emit('addErrorBag', 'Adicione pelo menos duas parcela.');
+            }
+        } else {
+            $this->setOnlyOneParcel();
+        }
     }
 
     public function setTotal()
@@ -109,14 +148,24 @@ class ParcelsTable extends Component
 
     public function setOnlyOneParcel()
     {
-        $this->parcels = [
-            'parcel_day' => 0,
-            'parcel_price' => $this->totalWithDiscouts,
-            'payment_parcel' => $this->payment_parcel,
-            'description_parcel' => $this->description_parcel,
-        ];
+        $this->validate([
+            'payment_parcel' => 'required',
+        ]);
 
-        $this->emit('onlyOneParcel', $this->parcels);
+        if ($this->payment_parcel) {
+            $this->parcels = [
+                'parcel_day' => 0,
+                'parcel_price' => $this->totalWithDiscouts,
+                'payment_parcel' => $this->payment_parcel,
+                'description_parcel' => $this->description_parcel,
+            ];
+
+            $this->emit('onlyOneParcel', $this->parcels);
+        } else {
+            if (is_null($this->payment_parcel)) {
+                $this->emit('addErrorBag', 'Selecione uma forma de pagamento.');
+            }
+        }
     }
 
     private function calculateParcelPrice($parcelsAmount, $firstPrice)
@@ -152,5 +201,12 @@ class ParcelsTable extends Component
                 return $paymentMethod;
             }
         })->toArray();
+    }
+
+    public function changeShowParcels()
+    {
+        $this->parcels = [];
+        $this->emit('parcelsAdded', $this->parcels);
+        $this->render();
     }
 }

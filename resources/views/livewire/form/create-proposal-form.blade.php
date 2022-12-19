@@ -1,5 +1,5 @@
 <div class="">
-    <form class="" method="POST" action="{{ route('client.store') }}" wire:submit.prevent="submit">
+    <form class="" method="POST" action="{{ route('client.store') }}" wire:submit.prevent="canSubmit">
         @csrf
         <div class="grid grid-cols-12 gap-4 p-6 mb-4 bg-white border-b border-gray-200 ">
             <div class="col-span-12">
@@ -36,15 +36,15 @@
             </div>
 
             <div class="w-full col-span-2">
-                <x-input-label for="NFE" :value="__('form.NFE')" />
+                <x-input-label for="nfe" :value="__('form.nfe')" />
 
-                <x-select-input class="block w-full mt-1 text-slate-600" name="NFE" wire:change.defer="changeNFE" wire:model.lazy='NFE' :value="old('NFE')">
+                <x-select-input class="block w-full mt-1 text-slate-600" name="nfe" wire:change.defer="changeNfe" wire:model.lazy='nfe' :value="old('nfe')">
                     <option value="" class="text-slate-600" selected>{{ __('form.first_select') }}</option>
                     <option value="1" class="text-slate-600">Sim</option>
                     <option value="0" class="text-slate-600">Não</option>
                 </x-select-input>
 
-                <x-input-error :messages="$errors->get('NFE')" class="mt-2" />
+                <x-input-error :messages="$errors->get('nfe')" class="mt-2" />
             </div>
         </div>
 
@@ -52,7 +52,7 @@
             <h2 class="col-span-12">Dados Produtos</h2>
 
             <div class="col-span-12">
-                <livewire:table.products-proposal :products="$products" :client="$client" :saleMode="$saleMode" :NFE="$NFE" />
+                <livewire:table.products-proposal :products="$products" :client="$client" :saleMode="$saleMode" :nfe="$nfe" />
             </div>
         </div>
         <!-- @if (isset($client)) -->
@@ -106,6 +106,8 @@
         </div>
 
         <div class="grid grid-cols-12 gap-4 p-6 mb-4 bg-white border-b border-gray-200 ">
+            <x-input-error :messages="$errors->get('parcels')" class="col-span-12 mt-2" />
+
             <livewire:table.parcels-table :products="$products" :parcels="$parcels" :client="$client" :seller_discount="$seller_discount" />
         </div>
 

@@ -17,6 +17,16 @@ return new class extends Migration
     {
         Schema::create('feed_backs', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('from_user')
+                ->nullable()
+                ->nullOnDelete()
+                ->constrained('users', 'id');
+            $table->foreignId('to_user')
+                ->nullable()
+                ->nullOnDelete()
+                ->constrained('users', 'id');
+            $table->text('feedback');
+            $table->integer('likes')->default(0);
             $table->timestamps();
         });
     }

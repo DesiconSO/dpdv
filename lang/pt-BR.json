@@ -134,5 +134,15 @@
     "Seller note": "Observação",
     "Status": "Status",
     "Updated at": "Atualizado em",
-    "Client": "Cliente"
+    "Client": "Cliente",
+    "From user": "De",
+    "To user": "Para",
+    "Created at": "Criado em",
+    "navigation.feedbacks": "Feedbacks",
+    "Feedback created successfully": "Feedback criado com sucesso",
+    "From": "De",
+    "To": "Para",
+    "Likes": "Curtidas",
+    "Like": "Adicionar curtida",
+    "Unlike": "Remover curtida"
 }

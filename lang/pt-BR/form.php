@@ -50,6 +50,9 @@ return [
     'shippingMode' => 'Modo de envio',
     'saleMode' => 'Modo de venda',
     'description_payment' => 'Descrição do pagamento',
+    'from_user' => 'De',
+    'to_user' => 'Para',
+    'feedback' => 'Feedback',
 
     'shipping_company' => 'Transportadora',
     'sale_mode' => 'Modo de venda',
@@ -71,7 +74,7 @@ return [
     'delete' => 'Remover',
     'user_changed' => 'O usuário foi alterado com sucesso!',
     'user_deleted' => 'O usuário foi removido com sucesso!',
-    'NFE' => 'Nota Fiscal Eletrônica',
+    'nfe' => 'Nota Fiscal Eletrônica',
     'true' => 'Sim',
     'false' => 'Não',
     'showParcels' => 'Deseja Parcelar?',

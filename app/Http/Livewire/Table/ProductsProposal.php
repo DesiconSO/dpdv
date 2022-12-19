@@ -22,13 +22,13 @@ class ProductsProposal extends Component
 
     public $saleMode;
 
-    public $NFE;
+    public $nfe;
 
     protected $listeners = [
         'productAdded' => 'setProducts',
         'clientChanged' => 'setClient',
         'saleModeChanged' => 'setSaleMode',
-        'NFEChanged' => 'setNFE',
+        'NfeChanged' => 'setNfe',
     ];
 
     public function mount(array $products)
@@ -41,12 +41,12 @@ class ProductsProposal extends Component
         return view('livewire.table.products-proposal');
     }
 
-    public function setNFE($NFE)
+    public function setNfe($nfe)
     {
-        if ($NFE == '1') {
-            $this->NFE = true;
+        if ($nfe == '1') {
+            $this->nfe = true;
         } else {
-            $this->NFE = false;
+            $this->nfe = false;
         }
     }
 
@@ -71,7 +71,7 @@ class ProductsProposal extends Component
         'amount' => 'required|numeric',
         'saleMode' => 'required',
         'products' => 'array',
-        'NFE' => 'boolean',
+        'nfe' => 'boolean',
     ];
 
     protected $messages = [
@@ -86,26 +86,34 @@ class ProductsProposal extends Component
         $this->validate();
 
         $response = Http::bling([])->get("produto/{$this->sku}/json/");
-        $product = $response['retorno']['produtos'][0]['produto'];
-        $client = Client::all()->where('cpf_cnpj', '==', $this->client['cpf_cnpj'])->first();
 
-        // Calculete Difal
-        $difalDiscount = $this->getDifal(
-            $product,
-            $client,
-            $this->NFE,
-            $this->saleMode
-        );
+        if (isset($response->json()['retorno']['erros'])) {
+            foreach ($response->json()['retorno']['erros'] as $error) {
+                $this->addError('sku', $error['erro']['msg']);
+            }
+        } else {
+            $product = $response['retorno']['produtos'][0]['produto'];
 
-        // Calculete Staggered Discount
-        $staggeredDiscountTotal = $this->getStaggeredDiscount($product, $this->amount);
+            $client = Client::all()->where('cpf_cnpj', '==', $this->client['cpf_cnpj'])->first();
 
-        // Calculate total with discounts
-        $totalWithDiscouts = $this->getTotalWithDiscounts($difalDiscount, $staggeredDiscountTotal, $this->amount);
+            // Calculete Difal
+            $difalDiscount = $this->getDifal(
+                $product,
+                $client,
+                $this->nfe,
+                $this->saleMode
+            );
 
-        array_push($this->products, ['product' => $product, 'amount' => $this->amount, 'staggeredDiscount' => $staggeredDiscountTotal, 'difal' => $difalDiscount, 'totalWithDiscouts' => $totalWithDiscouts]);
+            // Calculete Staggered Discount
+            $staggeredDiscountTotal = $this->getStaggeredDiscount($product, $this->amount);
 
-        $this->emit('productAdded', $this->products);
+            // Calculate total with discounts
+            $totalWithDiscouts = $this->getTotalWithDiscounts($difalDiscount, $staggeredDiscountTotal, $this->amount);
+
+            array_push($this->products, ['product' => $product, 'amount' => $this->amount, 'staggeredDiscount' => $staggeredDiscountTotal, 'difal' => $difalDiscount, 'totalWithDiscouts' => $totalWithDiscouts]);
+
+            $this->emit('productAdded', $this->products);
+        }
     }
 
     private function getTotalWithDiscounts($difalDiscount, $staggeredDiscount, $amount)

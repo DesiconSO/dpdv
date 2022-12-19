@@ -11,7 +11,25 @@ class FeedBack extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = [
+        'from_user',
+        'to_user',
+        'feedback',
+    ];
 
-    protected $cast = [];
+    protected $cast = [
+        'from_user' => User::class,
+        'to_user' => User::class,
+        'feedback' => 'string',
+    ];
+
+    public function fromUser()
+    {
+        return $this->belongsTo(User::class, 'from_user');
+    }
+
+    public function toUser()
+    {
+        return $this->belongsTo(User::class, 'to_user');
+    }
 }

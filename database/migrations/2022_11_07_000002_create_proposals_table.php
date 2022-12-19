@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('shipping_mode');
             $table->float('seller_discount', 5, 2)->default(0);
             $table->float('shipping_price', 10, 2)->default(0);
-            $table->text('seller_note');
+            $table->text('seller_note')->nullable();
             $table->char('status', 1)->default(0);
             $table->timestamps();
         });

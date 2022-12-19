@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\FeedBackController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Dashboard;
+use App\Models\FeedBack;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,6 +35,7 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
             'proposal' => ProposalController::class,
             'product' => ProductController::class,
             'discount' => DiscountController::class,
+            'feedback' => FeedBackController::class,
         ]
     );
 });
@@ -52,4 +55,4 @@ Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin']], function
 Route::get('/teste', function () {
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

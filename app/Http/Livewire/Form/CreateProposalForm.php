@@ -13,47 +13,31 @@ use Livewire\Component;
 class CreateProposalForm extends Component
 {
     public $client;
-
     public $shipping_company;
-
     public $seller_discount;
-
     public $shipping_price;
-
     public $seller_note;
-
     public $status;
-
     public $shippingMode;
-
     public $saleMode;
-
-    public $NFE;
-
+    public $nfe;
     public $products = [];
-
     public $parcels = [];
+
+    public $otherErrors = [];
 
     protected $listeners = [
         'productAdded' => 'setProducts',
         'parcelsAdded' => 'setParcels',
         'onlyOneParcel' => 'setOnlyOneParcel',
+        'addErrorBag' => 'addErrorBag',
+        'submitValidation' => 'submit',
     ];
-
-    public function setProducts(array $products)
-    {
-        $this->products = $products;
-    }
-
-    public function setParcels(array $parcels)
-    {
-        $this->parcels = $parcels;
-    }
 
     protected $rules = [
         'client' => 'required',
         'shipping_company' => 'required',
-        'seller_discount' => 'required|numeric',
+        'seller_discount' => '',
         'shipping_price' => 'required|numeric',
         'seller_note' => '',
         'status' => '',
@@ -61,8 +45,32 @@ class CreateProposalForm extends Component
         'saleMode' => 'required',
         'products' => 'array',
         'parcels' => 'array',
-        'NFE' => 'boolean|required',
+        'nfe' => 'boolean|required',
     ];
+
+    public function render()
+    {
+        $shippingModeState = ShippingMode::cases();
+        $saleModeState = SaleMode::cases();
+        $shippingCompany = ShippingCompany::cases();
+
+        return view(
+            'livewire.form.create-proposal-form',
+            compact('shippingModeState', 'saleModeState', 'shippingCompany')
+        );
+    }
+
+    public function setProducts(array $products)
+    {
+        $this->emit('resetParcels');
+        $this->products = $products;
+    }
+
+    public function setParcels(array $parcels)
+    {
+        $this->resetErrorBag();
+        $this->parcels = $parcels;
+    }
 
     public function changeSellerDiscount()
     {
@@ -85,11 +93,13 @@ class CreateProposalForm extends Component
     public function setOnlyOneParcel($parcels)
     {
         $this->parcels[0] = $parcels;
+
+        $this->submit();
     }
 
-    public function changeNFE()
+    public function changeNfe()
     {
-        $this->emit('NFEChanged', $this->NFE);
+        $this->emit('NfeChanged', $this->nfe);
     }
 
     public function changeSaleMode()
@@ -97,27 +107,40 @@ class CreateProposalForm extends Component
         $this->emit('saleModeChanged', $this->saleMode);
     }
 
-    public function render()
+    private function verifyIfHaveProductsInArray()
     {
-        $shippingModeState = ShippingMode::cases();
-        $saleModeState = SaleMode::cases();
-        $shippingCompany = ShippingCompany::cases();
+        if (!count($this->products)) {
+            $this->addError('products', 'Adicione pelo menos um produto.');
+            return false;
+        } else {
+            return true;
+        }
+    }
 
-        return view(
-            'livewire.form.create-proposal-form',
-            compact('shippingModeState', 'saleModeState', 'shippingCompany')
-        );
+    public function verifyIfHaveParcelsInArray()
+    {
+        if (!count($this->parcels)) {
+            $this->emit('getParcel', $this->parcels);
+        }
+    }
+
+    public function addErrorBag($message)
+    {
+        $this->addError('parcels', $message);
+    }
+
+    public function canSubmit()
+    {
+        $this->emit('canSubmit', $this->parcels);
     }
 
     public function submit()
     {
-        if ($this->validate()) {
-            if ($this->parcels == null) {
-                $this->emit('getParcel', $this->parcels);
-            }
+        if ($this->validate() && $this->verifyIfHaveProductsInArray()) {
 
             $client = Client::all()->firstWhere('cpf_cnpj', '===', $this->client);
 
+            dd($this->parcels);
             Proposal::create([
                 'user_id' => auth()->user()->id,
                 'client_id' => $client->id,
@@ -128,7 +151,7 @@ class CreateProposalForm extends Component
                 'status' => StatusProposal::WAITING->value,
                 'shipping_mode' => ShippingMode::from($this->shippingMode)->value,
                 'sale_mode' => SaleMode::from($this->saleMode)->value,
-                'NFE' => $this->NFE,
+                'nfe' => $this->nfe,
             ]);
 
             return redirect()->route('proposal.index')->with('success', 'Proposta criada com sucesso!');

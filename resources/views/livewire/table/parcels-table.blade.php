@@ -2,7 +2,7 @@
     <div class="col-span-5">
         <x-input-label for="showParcels" :value="__('form.showParcels')" class="" />
 
-        <x-select-input id="showParcels" class="block w-full mt-1 text-slate-600" name="showParcels" wire:model.lazy='showParcels' :value="old('showParcels')">
+        <x-select-input id="showParcels" wire:change="changeShowParcels" class="block w-full mt-1 text-slate-600" name="showParcels" wire:model.lazy='showParcels' :value="old('showParcels')">
             <option value="0" class="text-slate-600" selected>{{ __('form.false') }}</option>
             <option value="1" class="text-slate-600">{{ __('form.true') }}</option>
         </x-select-input>

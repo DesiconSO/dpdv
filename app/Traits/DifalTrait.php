@@ -4,7 +4,7 @@ namespace App\Traits;
 
 trait DifalTrait
 {
-    public function getDifal($product, $client, bool $NFE, $sellType)
+    public function getDifal($product, $client, bool $nfe, $sellType)
     {
         try {
             $clientType = $this->clientType($client);
@@ -13,9 +13,9 @@ trait DifalTrait
                 /* Verifica se o client é de são paulo */
                 if ($client->uf == 'SP') {
                     /* Verifica se o client quer ou não nota */
-                    if ($NFE == false) {
+                    if ($nfe == false) {
                         /* Pega os produtos que não são ST */
-                        if (! strpos($product['grupoProduto'], 'ST')) {
+                        if (!strpos($product['grupoProduto'], 'ST')) {
                             return 12;
                         } else {
                             return 0;
@@ -29,13 +29,13 @@ trait DifalTrait
             } elseif ($clientType == true) {
                 /* Verificar se é consumo e ou revenda */
                 if ($sellType == 0) {
-                    return $this->descontoUF($product, $client, $NFE);
+                    return $this->descontoUF($product, $client, $nfe);
                 } elseif ($sellType == 1) {
                     // dd(strpos($produto['grupoProduto'], 'ST'));
                     if (strpos($product['grupoProduto'], 'ST') !== false) {
                         dd('Verificar produto!');
                     } else {
-                        return $this->descontoUF($product, $client, $NFE);
+                        return $this->descontoUF($product, $client, $nfe);
                     }
                 }
             } else {
@@ -63,13 +63,13 @@ trait DifalTrait
         }
     }
 
-    private function descontoUF($produto, $client, $NFE)
+    private function descontoUF($produto, $client, $nfe)
     {
         if ($client->uf == 'SP') {
             /* Verifica se o client quer ou não nota */
-            if ($NFE == 'false') {
+            if ($nfe == 'false') {
                 /* Pega os produtos que não são ST */
-                if (! strpos($produto['grupoProduto'], 'ST')) {
+                if (!strpos($produto['grupoProduto'], 'ST')) {
                     return 12;
                 } else {
                     return 0;

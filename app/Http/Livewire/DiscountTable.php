@@ -30,7 +30,7 @@ class DiscountTable extends DataTableComponent
             Column::make(__('table.user'), 'user.name')
                 ->searchable()
                 ->sortable(),
-            Column::make(__('table.sku'), 'product.sku')
+            Column::make(__('table.sku'), 'product.name')
                 ->sortable()
                 ->searchable()
                 ->setSortingPillDirections('0-9', '9-0'),
@@ -42,7 +42,7 @@ class DiscountTable extends DataTableComponent
             Column::make('')
                 ->label(
                     function ($row) {
-                        $delete = '<button class="px-2 py-1 m-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" wire:click="delete('.$row->id.')">Excluir</button>';
+                        $delete = '<button class="px-2 py-1 m-1 font-bold text-white bg-blue-500 rounded hover:bg-blue-700" wire:click="delete(' . $row->id . ')">Excluir</button>';
 
                         return $delete;
                     }

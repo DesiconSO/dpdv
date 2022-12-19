@@ -30,7 +30,7 @@ class Proposal extends Model
         'sale_mode' => SaleMode::class,
         'shipping_company' => ShippingCompany::class,
         'status' => Status::class,
-        'shipping_price' => 'money:USD',
+        'shipping_price' => 'money:BRL',
     ];
 
     public function getShippingPriceAttribute($value)

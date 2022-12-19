@@ -16,7 +16,7 @@ class FeedBackController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.feedbacks.index');
     }
 
     /**
@@ -26,7 +26,7 @@ class FeedBackController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.feedbacks.create');
     }
 
     /**
