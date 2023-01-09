@@ -81,12 +81,15 @@ class CreateProposalForm extends Component
     {
         if ($this->client != null) {
             $client = Client::all()->firstWhere('cpf_cnpj', '===', $this->client);
+
             if ($client) {
                 $this->emit('clientChanged', $client);
                 $this->resetErrorBag();
             } else {
                 $this->addError('client', 'Cliente não encontrado');
             }
+
+            $this->setProducts([]);
         }
     }
 
@@ -100,11 +103,18 @@ class CreateProposalForm extends Component
     public function changeNfe()
     {
         $this->emit('NfeChanged', $this->nfe);
+        if ($this->nfe != null) {
+            $this->setProducts([]);
+        }
     }
 
     public function changeSaleMode()
     {
         $this->emit('saleModeChanged', $this->saleMode);
+
+        if ($this->saleMode != null) {
+            $this->setProducts([]);
+        }
     }
 
     private function verifyIfHaveProductsInArray()

@@ -71,4 +71,9 @@ class Client extends Model
             set: fn ($value) => unformatDocument($value)
         );
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class);
+    }
 }

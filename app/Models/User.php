@@ -58,4 +58,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(ProposalProducts::class);
     }
+
+    public function feedBacks()
+    {
+        return $this->hasMany(FeedBack::class);
+    }
 }

@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Factories;
 
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,9 +21,8 @@ class ProposalProductsFactory extends Factory
     public function definition()
     {
         return [
-            'proposal_id' => Factory::factoryForModel(\App\Models\Proposal::class),
-            'product_id' => Factory::factoryForModel(\App\Models\Product::class),
-            'user_id' => Factory::factoryForModel(\App\Models\User::class),
+            'product_id' => Product::all()->random(),
+            'user_id' => User::all()->random(),
             'amount' => $this->faker->randomNumber(1, true),
             'discount' => $this->faker->randomFloat(2, 0, 15),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),

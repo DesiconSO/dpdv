@@ -43,6 +43,8 @@ class ClientPurchasesChart extends Chart
 
         $this->displayLegend(true);
 
+        $this->displayAxes(false);
+
         return $this;
     }
 }

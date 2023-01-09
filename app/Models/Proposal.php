@@ -48,7 +48,7 @@ class Proposal extends Model
         return $this->belongsTo(Client::class);
     }
 
-    public function products_proposal(): BelongsTo
+    public function productsProposal(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

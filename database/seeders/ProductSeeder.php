@@ -2,7 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 
 class ProductSeeder extends Seeder
 {
@@ -13,5 +15,9 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        if (App::environment('local')) {
+            Product::factory(10)
+                ->create();
+        }
     }
 }

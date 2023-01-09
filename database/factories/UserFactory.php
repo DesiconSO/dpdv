@@ -19,22 +19,29 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        if (fake()->boolean(60)) {
+            $client = Client::factory()->create();
+        } else {
+            $client = null;
+        }
+
         return [
-            'client_id' => Client::all()->random()->id,
-            'name' => Client::all()->random()->name,
-            'email' => $this->faker->unique()->safeEmail(),
+            'client_id' => isset($client) ? $client->id : null,
+            'name' => isset($client) ? $client->name : fake('pt_BR')->name(),
+            'email' => isset($client) ? $client->email : fake('pt_BR')->unique()->safeEmail(),
+            'name' => fake('pt_BR')->name(),
+            'email' => fake('pt_BR')->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'remember_token' => Str::random(10),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
-            'updated_at' => $this->faker->dateTimeBetween('-1 year', '+1 year'),
+            'created_at' => fake()->dateTimeBetween('-1 year', '+1 year'),
+            'updated_at' => fake()->dateTimeBetween('-1 year', '+1 year'),
         ];
     }
 
     public function configure()
     {
         return $this->afterCreating(function (User $user) {
-            $user->assignRole('user');
         });
     }
 

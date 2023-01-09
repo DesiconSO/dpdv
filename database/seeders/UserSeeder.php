@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\Client;
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\App;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
@@ -79,5 +81,10 @@ class UserSeeder extends Seeder
         $user->assignRole($userRole);
 
         // Users >>>>>>>>
+        if (App::environment('local')) {
+            User::factory(10)
+                ->has(Client::factory()->count(1), 'client')
+                ->create();
+        }
     }
 }

@@ -7,7 +7,6 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProposalController;
 use App\Http\Controllers\UserController;
 use App\Http\Livewire\Dashboard;
-use App\Models\FeedBack;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -41,12 +40,10 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
 });
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin|seller']], function () {
-    Route::resources(
-        [
-            'client' => ClientController::class,
-        ]
-    );
+    Route::resource('/client', ClientController::class, ['except' => ['index', 'create', 'store']]);
 });
+
+Route::resource('/client', ClientController::class, ['only' => ['index', 'create', 'store']]);
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin']], function () {
     Route::resource('user', UserController::class);

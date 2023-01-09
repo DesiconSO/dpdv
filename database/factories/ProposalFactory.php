@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\SaleMode;
+use App\Enums\ShippingCompany;
 use App\Enums\ShippingMode;
 use App\Enums\StatusProposal;
 use App\Models\Client;
@@ -22,16 +23,16 @@ class ProposalFactory extends Factory
     public function definition()
     {
         return [
-            'user_id' => User::all()->random()->id,
-            'client_id' => Client::all()->random()->id,
-            'shipping_company' => $this->faker->company(),
-            'sale_mode' => $this->faker->randomElement(SaleMode::cases()),
-            'shipping_mode' => $this->faker->randomElement(ShippingMode::cases()),
-            'seller_discount' => $this->faker->randomFloat(2, 0, 15),
-            'shipping_price' => $this->faker->randomFloat(2, 5, 2000),
-            'seller_note' => $this->faker->sentence(6),
-            'status' => $this->faker->randomElement(StatusProposal::cases()),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'user_id' => fake()->randomElement([User::factory(), User::all()->random()]),
+            'client_id' => fake()->randomElement([Client::factory(), Client::all()->random()]),
+            'shipping_company' => fake()->randomElement(ShippingCompany::cases()),
+            'sale_mode' => fake()->randomElement(SaleMode::cases()),
+            'shipping_mode' => fake()->randomElement(ShippingMode::cases()),
+            'seller_discount' => fake()->randomFloat(2, 0, 15),
+            'shipping_price' => fake()->randomFloat(2, 5, 2000),
+            'seller_note' => fake('pt_BR')->sentence(6),
+            'status' => fake()->randomElement(StatusProposal::cases()),
+            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }
