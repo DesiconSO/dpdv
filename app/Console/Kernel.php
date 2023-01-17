@@ -22,10 +22,6 @@ class Kernel extends ConsoleKernel
         $schedule->command('optimize:clear')
             ->dailyAt('4:00')
             ->appendOutputTo('storage/logs/optimize.log');
-
-        $schedule->command('queue:work')
-            ->everyMinute()
-            ->appendOutputTo('storage/logs/queue.log');
     }
 
     /**
