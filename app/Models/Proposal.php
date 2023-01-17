@@ -50,6 +50,6 @@ class Proposal extends Model
 
     public function productsProposal(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(ProposalProducts::class);
     }
 }

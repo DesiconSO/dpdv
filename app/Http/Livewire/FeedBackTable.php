@@ -14,7 +14,6 @@ class FeedBackTable extends DataTableComponent
 
     public function configure(): void
     {
-        // dd(FeedBack::all()->last()->fromUser);
         $this->setPrimaryKey('id')
             ->setHideReorderColumnUnlessReorderingEnabled()
             ->setSingleSortingDisabled()

@@ -30,10 +30,13 @@ class DiscountTable extends DataTableComponent
             Column::make(__('table.user'), 'user.name')
                 ->searchable()
                 ->sortable(),
-            Column::make(__('table.sku'), 'product.name')
+            Column::make(__('table.sku'), 'product.sku')
                 ->sortable()
                 ->searchable()
                 ->setSortingPillDirections('0-9', '9-0'),
+            Column::make(__('table.name'), 'product.name')
+                ->sortable()
+                ->searchable(),
             Column::make(__('table.Max amount'), 'max_amount')
                 ->sortable(),
             Column::make(__('table.discount'), 'discount'),

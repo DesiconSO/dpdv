@@ -40,7 +40,6 @@ class ClientCreatedChart extends Chart
 
         $this->labels($data2);
 
-        // dd($usersData->map(fn ($user) => $user['count'])->toArray());
         $this->dataset('Propostas', 'bar', $data1)
             ->options([
                 'backgroundColor' => 'rgba(56, 203, 10, 0.6)',

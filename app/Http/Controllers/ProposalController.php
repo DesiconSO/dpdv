@@ -60,7 +60,7 @@ class ProposalController extends Controller
      */
     public function edit(Proposal $proposal)
     {
-        //
+        return view('pages.proposals.edit', compact('proposal'));
     }
 
     /**

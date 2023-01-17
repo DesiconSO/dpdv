@@ -10,23 +10,28 @@ class ProposalProducts extends Model
     use HasFactory;
 
     protected $fillable = [
+        'proposal_id',
+        'product_id',
+        'user_id',
+        'discount',
         'amount',
+        'total'
     ];
 
     protected $cast = [];
 
     public function proposal()
     {
-        return $this->belongsTo(Proposal::class);
+        return $this->hasMany(Proposal::class);
     }
 
     public function product()
     {
-        return $this->hasOne(Product::class);
+        return $this->belongsTo(Product::class);
     }
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(User::class);
     }
 }

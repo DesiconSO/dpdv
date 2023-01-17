@@ -31,7 +31,6 @@ trait DifalTrait
                 if ($sellType == 0) {
                     return $this->descontoUF($product, $client, $nfe);
                 } elseif ($sellType == 1) {
-                    // dd(strpos($produto['grupoProduto'], 'ST'));
                     if (strpos($product['grupoProduto'], 'ST') !== false) {
                         dd('Verificar produto!');
                     } else {

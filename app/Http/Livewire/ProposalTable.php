@@ -15,9 +15,18 @@ class ProposalTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
-        $this->setEagerLoadAllRelationsStatus(true);
+        $this->setPrimaryKey('id')
+            ->setTableRowUrl(function ($row) {
+                return route('proposal.edit', $row);
+            })
+            ->setTableRowUrlTarget(function ($row) {
+                if ($row->type === 'this') {
+                    return '_blank';
+                }
+                return '_self';
+            });
 
+        $this->setEagerLoadAllRelationsStatus(true);
         $this->setEmptyMessage(__('No results found'));
     }
 

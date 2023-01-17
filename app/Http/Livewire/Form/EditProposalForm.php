@@ -6,13 +6,11 @@ use App\Enums\SaleMode;
 use App\Enums\ShippingCompany;
 use App\Enums\ShippingMode;
 use App\Enums\StatusProposal;
-use App\Http\Livewire\Table\ProductsProposal;
 use App\Models\Client;
 use App\Models\Proposal;
-use App\Models\ProposalProducts;
 use Livewire\Component;
 
-class CreateProposalForm extends Component
+class EditProposalForm extends Component
 {
     public $client;
     public $shipping_company;
@@ -25,6 +23,7 @@ class CreateProposalForm extends Component
     public $nfe;
     public $products = [];
     public $parcels = [];
+    public $proposal;
 
     public $otherErrors = [];
 
@@ -50,8 +49,22 @@ class CreateProposalForm extends Component
         'nfe' => 'boolean|required',
     ];
 
-    public function mount()
+    public function mount(Proposal $proposal)
     {
+        dd($proposal->productsProposal);
+        $this->proposal = $proposal;
+
+        $this->client = Client::find($proposal->client);
+        $this->shipping_company = $proposal->shipping_company;
+        $this->seller_discount = $proposal->seller_discount;
+        $this->shipping_price  = $proposal->shipping_price;
+        $this->seller_note = $proposal->seller_note;
+        $this->status = $proposal->status;
+        $this->shippingMode = $proposal->shippingMode;
+        $this->saleMode = $proposal->saleMode;
+        $this->nfe = $proposal->nfe;
+        $this->products = [];
+        $this->parcels = [];
     }
 
     public function render()
@@ -152,13 +165,11 @@ class CreateProposalForm extends Component
 
     public function submit()
     {
-        // dd($this->products);
-
         if ($this->validate() && $this->verifyIfHaveProductsInArray()) {
 
             $client = Client::all()->firstWhere('cpf_cnpj', '===', $this->client);
 
-            $proposal = Proposal::create([
+            Proposal::create([
                 'user_id' => auth()->user()->id,
                 'client_id' => $client->id,
                 'shipping_company' => ShippingCompany::from($this->shipping_company)->value,
@@ -170,17 +181,6 @@ class CreateProposalForm extends Component
                 'sale_mode' => SaleMode::from($this->saleMode)->value,
                 'nfe' => $this->nfe,
             ]);
-
-            foreach ($this->products as $item) {
-                ProposalProducts::create([
-                    'proposal_id' => $proposal->id,
-                    'product_id' => $item['product']['id'],
-                    'amount' => $item['amount'],
-                    'user_id' => auth()->user()->id,
-                    'discount' => $item['difal'],
-                    'total' => $item['totalWithDiscouts'],
-                ]);
-            }
 
             return redirect()->route('proposal.index')->with('success', 'Proposta criada com sucesso!');
         }

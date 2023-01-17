@@ -10,7 +10,6 @@ trait StaggeredDiscountTrait
     public function getStaggeredDiscount(array $product, int $amount): float|bool
     {
         $price = $product['preco'];
-        dd(Product::all()->firstWhere('sku', '===', $product['codigo']));
         $product = Product::all()->firstWhere('sku', '===', $product['codigo']);
 
         if ($product != null) {

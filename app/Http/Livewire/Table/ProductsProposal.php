@@ -105,14 +105,18 @@ class ProductsProposal extends Component
             );
 
             // Calculete Staggered Discount
-            $staggeredDiscountTotal = $this->getStaggeredDiscount($product, $this->amount);
 
-            // Calculate total with discounts
-            $totalWithDiscouts = $this->getTotalWithDiscounts($difalDiscount, $staggeredDiscountTotal, $this->amount);
 
-            array_push($this->products, ['product' => $product, 'amount' => $this->amount, 'staggeredDiscount' => $staggeredDiscountTotal, 'difal' => $difalDiscount, 'totalWithDiscouts' => $totalWithDiscouts]);
+            if ($staggeredDiscountTotal = $this->getStaggeredDiscount($product, $this->amount)) {
+                // Calculate total with discounts
+                $totalWithDiscouts = $this->getTotalWithDiscounts($difalDiscount, $staggeredDiscountTotal, $this->amount);
 
-            $this->emit('productAdded', $this->products);
+                array_push($this->products, ['product' => $product, 'amount' => $this->amount, 'staggeredDiscount' => $staggeredDiscountTotal, 'difal' => $difalDiscount, 'totalWithDiscouts' => $totalWithDiscouts]);
+
+                $this->emit('productAdded', $this->products);
+            } else {
+                $this->addError('sku', 'O produto não encontrado.');
+            }
         }
     }
 
