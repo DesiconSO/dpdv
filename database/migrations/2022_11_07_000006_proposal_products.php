@@ -14,13 +14,13 @@ return new class extends Migration
             $table->id();
             $table->foreignId('proposal_id')
                 ->constrained()
-                ->cascadeOnDelete();
+                ->onDelete('cascade');
             $table->foreignId('product_id')
                 ->constrained()
-                ->cascadeOnDelete();
+                ->onDelete('cascade');
             $table->foreignId('user_id')
                 ->constrained()
-                ->cascadeOnDelete();
+                ->onDelete('cascade');
             $table->float('discount', 10, 2)->default(0);
             $table->string('amount');
             $table->float('total', 10, 2);
@@ -30,9 +30,9 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('products');
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('proposals');
+        Schema::dropForeign('proposal_id');
+        Schema::dropForeign('product_id');
+        Schema::dropForeign('user_id');
         Schema::dropIfExists('propostal_products');
     }
 };
