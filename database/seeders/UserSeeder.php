@@ -20,9 +20,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $adminRole = Role::assignRole(['name' => 'admin']);
-        $sellerRole = Role::assignRole(['name' => 'seller']);
-        $userRole = Role::assignRole(['name' => 'user']);
+        $adminRole = Role::findByName('admin');
+        $sellerRole = Role::findByName('seller');
+        $userRole = Role::findByName('user');
 
         Permission::create(['name' => 'create client']);
         Permission::create(['name' => 'edit client']);
