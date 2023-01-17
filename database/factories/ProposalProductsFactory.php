@@ -25,6 +25,7 @@ class ProposalProductsFactory extends Factory
             'user_id' => User::all()->random(),
             'amount' => $this->faker->randomNumber(1, true),
             'discount' => $this->faker->randomFloat(2, 0, 15),
+            'total' => $this->faker->randomFloat(2, 0, 1000),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];

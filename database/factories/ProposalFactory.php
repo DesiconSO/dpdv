@@ -32,7 +32,7 @@ class ProposalFactory extends Factory
             'shipping_price' => fake()->randomFloat(2, 5, 2000),
             'seller_note' => fake('pt_BR')->sentence(6),
             'status' => fake()->randomElement(StatusProposal::cases()),
-            'created_at' => fake()->dateTimeBetween('-1 year', 'now'),
+            'created_at' => fake()->dateTimeBetween('now', '+1 year'),
         ];
     }
 }

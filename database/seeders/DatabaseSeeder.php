@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
 
-        if (App::environment('production')) {
+        if (App::environment('local')) {
             $this->call([
                 ClientSeeder::class,
                 ProductSeeder::class,
