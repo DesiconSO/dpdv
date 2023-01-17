@@ -8,7 +8,6 @@ use App\Models\Client;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\App;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 class UserSeeder extends Seeder
@@ -23,9 +22,6 @@ class UserSeeder extends Seeder
         $adminRole = Role::findByName('admin');
         $sellerRole = Role::findByName('seller');
         $userRole = Role::findByName('user');
-
-        Permission::create(['name' => 'create client']);
-        Permission::create(['name' => 'edit client']);
 
         $adminRole->getAllPermissions();
 
