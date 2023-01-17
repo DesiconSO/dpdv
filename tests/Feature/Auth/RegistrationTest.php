@@ -19,7 +19,7 @@ class RegistrationTest extends TestCase
 
     public function test_new_users_can_register()
     {
-        Role::create(['name' => 'user']);
+        Role::assignRole(['name' => 'user']);
 
         $response = $this->post('/register', [
             'name' => 'Test User',
