@@ -20,14 +20,14 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
         ]);
 
-        if (App::environment('local')) {
-            $this->call([
-                ClientSeeder::class,
-                ProductSeeder::class,
-                DiscountSeeder::class,
-                FeedBackSeeder::class,
-                ProposalSeeder::class,
-            ]);
-        }
+        // if (App::environment('local')) {
+        //     $this->call([
+        //         ClientSeeder::class,
+        //         ProductSeeder::class,
+        //         DiscountSeeder::class,
+        //         FeedBackSeeder::class,
+        //         ProposalSeeder::class,
+        //     ]);
+        // }
     }
 }

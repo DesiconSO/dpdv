@@ -19,6 +19,14 @@ class Kernel extends ConsoleKernel
             ->hourly()
             ->appendOutputTo('storage/logs/products-fresh.log');
 
+        $schedule->command('billPay:refresh')
+            ->everySixHours()
+            ->appendOutputTo('storage/logs/products-fresh.log');
+
+        $schedule->command('billRecive:refresh')
+            ->everySixHours()
+            ->appendOutputTo('storage/logs/products-fresh.log');
+
         $schedule->command('optimize:clear')
             ->dailyAt('4:00')
             ->appendOutputTo('storage/logs/optimize.log');

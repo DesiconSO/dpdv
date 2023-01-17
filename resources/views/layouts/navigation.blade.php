@@ -30,6 +30,12 @@
                     </x-nav-link>
                     @endrole
 
+                    @role('admin')
+                    <x-nav-link :href="route('billPay.index')" :active="request()->routeIs('billPay*')">
+                        {{ __('navigation.billPays') }}
+                    </x-nav-link>
+                    @endrole
+
                     <x-nav-link :href="route('discount.index')" :active="request()->routeIs('discount*')">
                         {{ __('navigation.discounts') }}
                     </x-nav-link>
@@ -103,6 +109,12 @@
             @role('admin|seller')
             <x-responsive-nav-link :href="route('client.index')" :active="request()->routeIs('client*')">
                 {{ __('navigation.clients') }}
+            </x-responsive-nav-link>
+            @endrole
+
+            @role('admin')
+            <x-responsive-nav-link :href="route('billPay.index')" :active="request()->routeIs('billPay*')">
+                {{ __('navigation.billPays') }}
             </x-responsive-nav-link>
             @endrole
 

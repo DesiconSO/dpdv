@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BillPayController;
+use App\Http\Controllers\BillReciveController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FeedBackController;
@@ -35,6 +37,8 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
             'product' => ProductController::class,
             'discount' => DiscountController::class,
             'feedback' => FeedBackController::class,
+            'billPay' => BillPayController::class,
+            'billRecive' => BillReciveController::class,
         ]
     );
 });
