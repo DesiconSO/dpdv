@@ -37,8 +37,6 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
             'product' => ProductController::class,
             'discount' => DiscountController::class,
             'feedback' => FeedBackController::class,
-            'billPay' => BillPayController::class,
-            'billRecive' => BillReciveController::class,
         ]
     );
 });
@@ -51,6 +49,12 @@ Route::resource('/client', ClientController::class, ['only' => ['index', 'create
 
 Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin']], function () {
     Route::resource('user', UserController::class);
+    Route::resources(
+        [
+            'billPay' => BillPayController::class,
+            'billRecive' => BillReciveController::class,
+        ]
+    );
 });
 
 Route::get('/teste', function () {
