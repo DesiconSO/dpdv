@@ -19,17 +19,9 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        if ($adminRole = Role::findByName('admin')) {
-            $adminRole = Role::create(['name' => 'admin']);
-        }
-
-        if ($sellerRole = Role::findByName('seller')) {
-            $sellerRole = Role::create(['name' => 'seller']);
-        }
-
-        if ($userRole = Role::findByName('user')) {
-            $userRole = Role::create(['name' => 'user']);
-        }
+        $adminRole = Role::create(['name' => 'admin']);
+        $sellerRole = Role::create(['name' => 'seller']);
+        $userRole = Role::create(['name' => 'user']);
 
         $adminRole->getAllPermissions();
 
