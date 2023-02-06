@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BillPayController;
 use App\Http\Controllers\BillReciveController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FeedBackController;
@@ -37,27 +38,28 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
             'product' => ProductController::class,
             'discount' => DiscountController::class,
             'feedback' => FeedBackController::class,
+            'category' => CategoryController::class,
         ]
     );
-});
 
-Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin|seller']], function () {
-    Route::resource('/client', ClientController::class, ['except' => ['index', 'create', 'store']]);
-});
+    Route::group(['middleware' => ['role:admin|seller']], function () {
+        Route::resource('/client', ClientController::class, ['except' => ['index', 'create', 'store']]);
+    });
 
-Route::resource('/client', ClientController::class, ['only' => ['index', 'create', 'store']]);
+    Route::resource('/client', ClientController::class, ['only' => ['index', 'create', 'store']]);
 
-Route::group(['prefix' => 'dashboard', 'middleware' => ['role:admin']], function () {
-    Route::resource('user', UserController::class);
-    Route::resources(
-        [
-            'billPay' => BillPayController::class,
-            'billRecive' => BillReciveController::class,
-        ]
-    );
+    Route::group(['middleware' => 'role:admin'], function () {
+        Route::resources(
+            [
+                'billPay' => BillPayController::class,
+                'billRecive' => BillReciveController::class,
+                'user' => UserController::class,
+            ]
+        );
+    });
 });
 
 Route::get('/teste', function () {
 });
 
-require __DIR__ . '/auth.php';
+require __DIR__.'/auth.php';

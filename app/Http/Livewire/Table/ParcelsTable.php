@@ -59,6 +59,7 @@ class ParcelsTable extends Component
         $this->getPaymentMethods();
 
         $this->client = $client;
+
         return view('livewire.table.parcels-table');
     }
 
@@ -129,7 +130,6 @@ class ParcelsTable extends Component
 
     public function setParcelsToSubmition()
     {
-
         if ($this->showParcels) {
             if ($this->verifyIfHaveParcels()) {
                 $this->emit('submitValidation');

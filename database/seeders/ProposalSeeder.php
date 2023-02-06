@@ -19,8 +19,7 @@ class ProposalSeeder extends Seeder
         if (App::environment('local')) {
             Proposal::factory(10)->hasProductsProposal(5)->create();
             Proposal::all()->map(
-                fn ($item) =>
-                ProposalProducts::factory(fake()->randomDigitNotNull())->create(['proposal_id' => $item->id])
+                fn ($item) => ProposalProducts::factory(fake()->randomDigitNotNull())->create(['proposal_id' => $item->id])
             );
         }
     }

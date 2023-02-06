@@ -3,8 +3,6 @@
 namespace App\Jobs;
 
 use App\Models\BillRecive;
-use App\Models\Conta;
-use App\Models\Receber;
 use Illuminate\Bus\Batchable;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,6 +16,7 @@ class GetBillsReciveJob implements ShouldQueue
     use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public int $tries = 1;
+
     public int $timeout = 240;
 
     /**
@@ -35,8 +34,8 @@ class GetBillsReciveJob implements ShouldQueue
         try {
             $count = 1;
             $request = '';
-            while (!isset($request['retorno']['erros'][0]['erro']['cod'])) {
-                $request = Http::get("https://bling.com.br/Api/v2/contasreceber/page=$count/json&apikey=" . env('API_KEY_BLING'));
+            while (! isset($request['retorno']['erros'][0]['erro']['cod'])) {
+                $request = Http::get("https://bling.com.br/Api/v2/contasreceber/page=$count/json&apikey=".env('API_KEY_BLING'));
 
                 if (isset($request['retorno']['contasreceber'])) {
                     if ($this->salvarContasBling($request['retorno']['contasreceber'])) {
@@ -49,11 +48,12 @@ class GetBillsReciveJob implements ShouldQueue
                     print_r("\nSoninho ein!");
                     sleep(1);
                 }
-            };
+            }
         } catch (\Exception $e) {
             dd($e);
         }
         print_r("\n*********** Finalizado! ***********");
+
         return true;
     }
 
@@ -72,15 +72,16 @@ class GetBillsReciveJob implements ShouldQueue
                     }
                 }
             }
+
             return true;
         } catch (\Exception $e) {
             dd($e);
         }
     }
 
-    function array_replace_key(&$arr, $old, $new, $overwrite = true): bool
+    public function array_replace_key(&$arr, $old, $new, $overwrite = true): bool
     {
-        if (isset($arr[$new]) and !$overwrite) {
+        if (isset($arr[$new]) and ! $overwrite) {
             return false;
         }
 

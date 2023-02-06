@@ -4,10 +4,9 @@
             <h2 class="text-xl font-semibold leading-tight text-gray-800">
                 {{ __('navigation.billPays') }}
             </h2>
-
-            @role('seller|admin')
-            <livewire:button-default text="{{ __('navigation.create') }}" link="">
-                @endrole
+            <div class="flex gap-2 row">
+                <livewire:components.left-categories-drawer.index />
+            </div>
         </div>
     </x-slot>
 
@@ -19,4 +18,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </x-app-layout>

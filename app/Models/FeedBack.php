@@ -15,7 +15,7 @@ class FeedBack extends Model
         'from_user',
         'to_user',
         'feedback',
-        'likes'
+        'likes',
     ];
 
     protected $cast = [

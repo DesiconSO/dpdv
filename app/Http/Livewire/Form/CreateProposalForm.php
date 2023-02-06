@@ -6,7 +6,6 @@ use App\Enums\SaleMode;
 use App\Enums\ShippingCompany;
 use App\Enums\ShippingMode;
 use App\Enums\StatusProposal;
-use App\Http\Livewire\Table\ProductsProposal;
 use App\Models\Client;
 use App\Models\Proposal;
 use App\Models\ProposalProducts;
@@ -15,15 +14,25 @@ use Livewire\Component;
 class CreateProposalForm extends Component
 {
     public $client;
+
     public $shipping_company;
+
     public $seller_discount;
+
     public $shipping_price;
+
     public $seller_note;
+
     public $status;
+
     public $shippingMode;
+
     public $saleMode;
+
     public $nfe;
+
     public $products = [];
+
     public $parcels = [];
 
     public $otherErrors = [];
@@ -125,8 +134,9 @@ class CreateProposalForm extends Component
 
     private function verifyIfHaveProductsInArray()
     {
-        if (!count($this->products)) {
+        if (! count($this->products)) {
             $this->addError('products', 'Adicione pelo menos um produto.');
+
             return false;
         } else {
             return true;
@@ -135,7 +145,7 @@ class CreateProposalForm extends Component
 
     public function verifyIfHaveParcelsInArray()
     {
-        if (!count($this->parcels)) {
+        if (! count($this->parcels)) {
             $this->emit('getParcel', $this->parcels);
         }
     }
@@ -155,7 +165,6 @@ class CreateProposalForm extends Component
         // dd($this->products);
 
         if ($this->validate() && $this->verifyIfHaveProductsInArray()) {
-
             $client = Client::all()->firstWhere('cpf_cnpj', '===', $this->client);
 
             $proposal = Proposal::create([

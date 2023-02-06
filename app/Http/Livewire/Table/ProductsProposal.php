@@ -106,7 +106,6 @@ class ProductsProposal extends Component
 
             // Calculete Staggered Discount
 
-
             if ($staggeredDiscountTotal = $this->getStaggeredDiscount($product, $this->amount)) {
                 // Calculate total with discounts
                 $totalWithDiscouts = $this->getTotalWithDiscounts($difalDiscount, $staggeredDiscountTotal, $this->amount);

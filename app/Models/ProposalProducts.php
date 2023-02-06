@@ -15,7 +15,7 @@ class ProposalProducts extends Model
         'user_id',
         'discount',
         'amount',
-        'total'
+        'total',
     ];
 
     protected $cast = [];

@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\FeedBack;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\FeedBack;
 
 class FeedBackTable extends DataTableComponent
 {
@@ -23,18 +23,18 @@ class FeedBackTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make(__("Id"), "id")
+            Column::make(__('Id'), 'id')
                 ->searchable()
                 ->sortable(),
-            Column::make(__("From user") . ":", "fromUser.name")
+            Column::make(__('From user').':', 'fromUser.name')
                 ->searchable()
                 ->sortable(),
-            Column::make(__("To user") . ":", "toUser.name")
+            Column::make(__('To user').':', 'toUser.name')
                 ->searchable()
                 ->sortable(),
-            Column::make(__("Updated at"), "updated_at")
+            Column::make(__('Updated at'), 'updated_at')
                 ->sortable(),
-            Column::make(__("Created at"), "created_at")
+            Column::make(__('Created at'), 'created_at')
                 ->sortable(),
         ];
     }

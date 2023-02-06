@@ -2,9 +2,9 @@
 
 namespace App\Http\Livewire\Table;
 
+use App\Models\BillRecive;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
-use App\Models\BillRecive;
 
 class BillReciveTable extends DataTableComponent
 {
@@ -18,45 +18,45 @@ class BillReciveTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            Column::make("Id", "id")
+            Column::make('Id', 'id')
                 ->sortable(),
-            Column::make("IdBling", "idBling")
+            Column::make('IdBling', 'idBling')
                 ->sortable(),
-            Column::make("DataEmissao", "dataEmissao")
+            Column::make('DataEmissao', 'dataEmissao')
                 ->sortable(),
-            Column::make("VencimentoOriginal", "vencimentoOriginal")
+            Column::make('VencimentoOriginal', 'vencimentoOriginal')
                 ->sortable(),
-            Column::make("Vencimento", "vencimento")
+            Column::make('Vencimento', 'vencimento')
                 ->sortable(),
-            Column::make("Competencia", "competencia")
+            Column::make('Competencia', 'competencia')
                 ->sortable(),
-            Column::make("NroDocumento", "nroDocumento")
+            Column::make('NroDocumento', 'nroDocumento')
                 ->sortable(),
-            Column::make("Valor", "valor")
+            Column::make('Valor', 'valor')
                 ->sortable(),
-            Column::make("Saldo", "saldo")
+            Column::make('Saldo', 'saldo')
                 ->sortable(),
-            Column::make("Historico", "historico")
+            Column::make('Historico', 'historico')
                 ->sortable(),
-            Column::make("Categoria", "categoria")
+            Column::make('Categoria', 'categoria')
                 ->sortable(),
-            Column::make("IdFormaPagamento", "idFormaPagamento")
+            Column::make('IdFormaPagamento', 'idFormaPagamento')
                 ->sortable(),
-            Column::make("Portador", "portador")
+            Column::make('Portador', 'portador')
                 ->sortable(),
-            Column::make("LinkBoleto", "linkBoleto")
+            Column::make('LinkBoleto', 'linkBoleto')
                 ->sortable(),
-            Column::make("Vendedor", "vendedor")
+            Column::make('Vendedor', 'vendedor')
                 ->sortable(),
-            Column::make("Pagamento", "pagamento")
+            Column::make('Pagamento', 'pagamento')
                 ->sortable(),
-            Column::make("Ocorrencia", "ocorrencia")
+            Column::make('Ocorrencia', 'ocorrencia')
                 ->sortable(),
-            Column::make("Cliente", "cliente")
+            Column::make('Cliente', 'cliente')
                 ->sortable(),
-            Column::make("Created at", "created_at")
+            Column::make('Created at', 'created_at')
                 ->sortable(),
-            Column::make("Updated at", "updated_at")
+            Column::make('Updated at', 'updated_at')
                 ->sortable(),
         ];
     }

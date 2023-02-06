@@ -5,7 +5,6 @@ namespace Database\Factories;
 use App\Enums\Contributor;
 use App\Enums\PersonType;
 use App\Enums\TaxRegimeCode;
-
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

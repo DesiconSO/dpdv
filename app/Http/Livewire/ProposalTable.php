@@ -23,6 +23,7 @@ class ProposalTable extends DataTableComponent
                 if ($row->type === 'this') {
                     return '_blank';
                 }
+
                 return '_self';
             });
 

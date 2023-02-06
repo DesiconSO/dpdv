@@ -8,6 +8,7 @@ use Livewire\Component;
 class CreateFeedbackForm extends Component
 {
     public $to_user;
+
     public $feedback;
 
     public function render()

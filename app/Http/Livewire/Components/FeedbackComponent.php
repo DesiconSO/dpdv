@@ -8,9 +8,13 @@ use Livewire\Component;
 class FeedbackComponent extends Component
 {
     public $feedbackId;
+
     public $fromUser;
+
     public $toUser;
+
     public $feedback;
+
     public $likes;
 
     public function mount(FeedBack $feedback)
@@ -34,7 +38,6 @@ class FeedbackComponent extends Component
 
         $feedBack->save();
     }
-
 
     public function unLike(FeedBack $feedBack)
     {

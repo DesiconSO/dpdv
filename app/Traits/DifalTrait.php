@@ -15,7 +15,7 @@ trait DifalTrait
                     /* Verifica se o client quer ou não nota */
                     if ($nfe == false) {
                         /* Pega os produtos que não são ST */
-                        if (!strpos($product['grupoProduto'], 'ST')) {
+                        if (! strpos($product['grupoProduto'], 'ST')) {
                             return 12;
                         } else {
                             return 0;
@@ -68,7 +68,7 @@ trait DifalTrait
             /* Verifica se o client quer ou não nota */
             if ($nfe == 'false') {
                 /* Pega os produtos que não são ST */
-                if (!strpos($produto['grupoProduto'], 'ST')) {
+                if (! strpos($produto['grupoProduto'], 'ST')) {
                     return 12;
                 } else {
                     return 0;

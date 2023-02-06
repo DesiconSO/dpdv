@@ -16,6 +16,7 @@ class GetBillsPayJob implements ShouldQueue
     use Batchable, Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public int $tries = 1;
+
     public int $timeout = 240;
 
     /**
@@ -33,8 +34,8 @@ class GetBillsPayJob implements ShouldQueue
         try {
             $count = 1;
             $request = '';
-            while (!isset($request['retorno']['erros'][0]['erro']['cod'])) {
-                $request = Http::get("https://bling.com.br/Api/v2/contaspagar/page=$count/json&apikey=" . env('API_KEY_BLING'));
+            while (! isset($request['retorno']['erros'][0]['erro']['cod'])) {
+                $request = Http::get("https://bling.com.br/Api/v2/contaspagar/page=$count/json&apikey=".env('API_KEY_BLING'));
 
                 if (isset($request['retorno']['contaspagar'])) {
                     if ($this->salvarContasBling($request['retorno']['contaspagar'])) {
@@ -47,12 +48,13 @@ class GetBillsPayJob implements ShouldQueue
                     print_r("\nsoninho ein!");
                     sleep(1);
                 }
-            };
+            }
         } catch (\Exception $e) {
             dd($e);
         }
 
         print_r("\n*********** Finalizado! ***********");
+
         return true;
     }
 
@@ -71,12 +73,13 @@ class GetBillsPayJob implements ShouldQueue
                 }
             }
         }
+
         return true;
     }
 
-    function array_replace_key(&$arr, $old, $new, $overwrite = true): bool
+    public function array_replace_key(&$arr, $old, $new, $overwrite = true): bool
     {
-        if (isset($arr[$new]) and !$overwrite) {
+        if (isset($arr[$new]) and ! $overwrite) {
             return false;
         }
 

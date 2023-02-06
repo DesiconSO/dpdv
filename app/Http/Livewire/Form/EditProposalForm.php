@@ -13,16 +13,27 @@ use Livewire\Component;
 class EditProposalForm extends Component
 {
     public $client;
+
     public $shipping_company;
+
     public $seller_discount;
+
     public $shipping_price;
+
     public $seller_note;
+
     public $status;
+
     public $shippingMode;
+
     public $saleMode;
+
     public $nfe;
+
     public $products = [];
+
     public $parcels = [];
+
     public $proposal;
 
     public $otherErrors = [];
@@ -57,7 +68,7 @@ class EditProposalForm extends Component
         $this->client = Client::find($proposal->client);
         $this->shipping_company = $proposal->shipping_company;
         $this->seller_discount = $proposal->seller_discount;
-        $this->shipping_price  = $proposal->shipping_price;
+        $this->shipping_price = $proposal->shipping_price;
         $this->seller_note = $proposal->seller_note;
         $this->status = $proposal->status;
         $this->shippingMode = $proposal->shippingMode;
@@ -138,8 +149,9 @@ class EditProposalForm extends Component
 
     private function verifyIfHaveProductsInArray()
     {
-        if (!count($this->products)) {
+        if (! count($this->products)) {
             $this->addError('products', 'Adicione pelo menos um produto.');
+
             return false;
         } else {
             return true;
@@ -148,7 +160,7 @@ class EditProposalForm extends Component
 
     public function verifyIfHaveParcelsInArray()
     {
-        if (!count($this->parcels)) {
+        if (! count($this->parcels)) {
             $this->emit('getParcel', $this->parcels);
         }
     }
@@ -166,7 +178,6 @@ class EditProposalForm extends Component
     public function submit()
     {
         if ($this->validate() && $this->verifyIfHaveProductsInArray()) {
-
             $client = Client::all()->firstWhere('cpf_cnpj', '===', $this->client);
 
             Proposal::create([
